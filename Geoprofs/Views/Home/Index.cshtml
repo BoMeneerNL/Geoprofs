@@ -1,56 +1,28 @@
 ﻿@{
+    await Geoprofs.Database.create.jeffAsync();
     ViewData["Title"] = "Home Page";
+    string[] titles = { "First","last","Handle" };
+    string[] firstnames = { "Mark","Jacob","Lary" };
+    string[] lastnames = { "Otto", "Thornton", "the Bird" };
 }
 
 <table class="table">
     <thead class="thead-dark">
         <tr>
-            <th scope="col">First</th>
-            <th scope="col">Last</th>
-            <th scope="col">Handle</th>
+            @foreach (string item in titles)
+            {
+                <th scope="col">@item</th>
+            }
         </tr>
     </thead>
     <tbody>
-        <tr>
-            <td>Mark</td>
-            <td>Otto</td>
-            <td>mdo</td>
-        </tr>
-        <tr>
-            <td>Jacob</td>
-            <td>Thornton</td>
-            <td>fat</td>
-        </tr>
-        <tr>
-            <td>Larry</td>
-            <td>the Bird</td>
-            <td>twitter</td>
-        </tr>
-    </tbody>
-</table>
-<table class="table">
-    <thead class="thead-light">
-        <tr>
-            <th scope="col">First</th>
-            <th scope="col">Last</th>
-            <th scope="col">Handle</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr>
-            <td>Mark</td>
-            <td>Otto</td>
-            <td>mdo</td>
-        </tr>
-        <tr>
-            <td>Jacob</td>
-            <td>Thornton</td>
-            <td>fat</td>
-        </tr>
-        <tr>
-            <td>Larry</td>
-            <td>the Bird</td>
-            <td>twitter</td>
-        </tr>
+        @for(int i=0;i<firstnames.Length; i++)
+        {
+            <tr>
+                <td>@firstnames[i]</td>
+                <td>@lastnames[i]</td>
+                <td>@firstnames[i]</td>
+            </tr>
+        }
     </tbody>
 </table>
