@@ -9,14 +9,13 @@ namespace Geoprofs.Database
     {
         public static async Task jeffAsync()
         {
+            Program.personeel = new();
             using var connection = new MySqlConnection(
                 "server=localhost;user=geoprofs;password=guiSs*X*Gk!pPyrK;database=geoprofs");
             await connection.OpenAsync();
 
             using var command = new MySqlCommand("SELECT * FROM personeel", connection);
             using var reader = await command.ExecuteReaderAsync();
-            List<DataRow> datarows = new();
-            
             while (await reader.ReadAsync())
             {
                 Dictionary<string, object> Personeel = new();

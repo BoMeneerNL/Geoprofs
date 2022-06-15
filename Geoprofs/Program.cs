@@ -17,10 +17,6 @@ namespace Geoprofs
         {
             CreateHostBuilder(args).Build().Run();
             await Database.create.jeffAsync();
-            for(int i =0; i < personeel.Count; i++)
-            {
-                Console.WriteLine(personeel[0]["password"]);
-            }
         }
 
         public static IHostBuilder CreateHostBuilder(string[] args) =>

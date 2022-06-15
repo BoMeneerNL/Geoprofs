@@ -4,25 +4,18 @@
     string[] titles = { "First","last","Handle" };
     string[] firstnames = { "Mark","Jacob","Lary" };
     string[] lastnames = { "Otto", "Thornton", "the Bird" };
+    List<Dictionary<string, object>> obj = Program.personeel;
 }
 
 <table class="table">
     <thead class="thead-dark">
         <tr>
-            @foreach (string item in titles)
-            {
-                <th scope="col">@item</th>
+            @for(int i = 0;i<obj.Count ; i++){
+                <tr>@obj[i]["personeelsnaam"]</tr>
             }
+            <tr>personeelsnaam</tr>
         </tr>
     </thead>
     <tbody>
-        @for(int i=0;i<firstnames.Length; i++)
-        {
-            <tr>
-                <td>@firstnames[i]</td>
-                <td>@lastnames[i]</td>
-                <td>@firstnames[i]</td>
-            </tr>
-        }
     </tbody>
 </table>
