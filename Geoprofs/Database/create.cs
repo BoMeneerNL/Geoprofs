@@ -19,14 +19,15 @@ namespace Geoprofs.Database
             
             while (await reader.ReadAsync())
             {
-                DataRow dr = null;
+                Dictionary<string, object> Personeel = new();
 
-
-
-                datarows.Add(dr);
+                Personeel.Add("personeelid",reader.GetInt64(0));
+                Personeel.Add("rankid", reader.GetInt64(1));
+                Personeel.Add("personeelsnaam",reader.GetString(2));
+                Personeel.Add("password", reader.GetString(3));
+                Program.personeel.Add(Personeel);
                 
             }
-            DataTable dt = datarows.ToArray().CopyToDataTable();
         }
     }
 }

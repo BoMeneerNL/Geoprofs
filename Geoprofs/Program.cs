@@ -4,6 +4,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -11,9 +12,15 @@ namespace Geoprofs
 {
     public class Program
     {
-        public static void Main(string[] args)
+        public static List<Dictionary<string,object>> personeel = new();
+        public static async Task Main(string[] args)
         {
             CreateHostBuilder(args).Build().Run();
+            await Database.create.jeffAsync();
+            for(int i =0; i < personeel.Count; i++)
+            {
+                Console.WriteLine(personeel[0]["password"]);
+            }
         }
 
         public static IHostBuilder CreateHostBuilder(string[] args) =>
