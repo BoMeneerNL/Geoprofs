@@ -26,7 +26,7 @@ namespace Geoprofs
         {
             services.AddControllersWithViews();
             services.AddWebOptimizer();
-            services.AddTransient<MySqlConnection>(_ => new MySqlConnection(Configuration["ConnectionStrings:Default"]));
+            services.AddTransient(_ => new MySqlConnection(Configuration["ConnectionStrings:Default"]));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -56,6 +56,10 @@ namespace Geoprofs
                 endpoints.MapControllerRoute(
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
+                endpoints.MapControllerRoute(
+                    name:"register",
+                    pattern:"/{action=Register}"
+                    );
             });
         }
     }

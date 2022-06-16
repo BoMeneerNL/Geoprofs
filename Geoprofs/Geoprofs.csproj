@@ -5,6 +5,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Content Remove="Views\Register\Index.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="LigerShark.WebOptimizer.Core" Version="3.0.357" />
     <PackageReference Include="MySqlConnector" Version="2.1.10" />
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="6.0.6" />
@@ -14,5 +18,6 @@
   <ItemGroup>
     <None Remove="Microsoft.VisualStudio.Web.CodeGeneration.Design" />
     <None Remove="Swashbuckle.AspNetCore" />
+    <None Remove="Views\Register\NewFile.txt" />
   </ItemGroup>
 </Project>

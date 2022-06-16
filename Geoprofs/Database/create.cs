@@ -18,12 +18,13 @@ namespace Geoprofs.Database
             using var reader = await command.ExecuteReaderAsync();
             while (await reader.ReadAsync())
             {
-                Dictionary<string, object> Personeel = new();
-
-                Personeel.Add("personeelid",reader.GetInt64(0));
-                Personeel.Add("rankid", reader.GetInt64(1));
-                Personeel.Add("personeelsnaam",reader.GetString(2));
-                Personeel.Add("password", reader.GetString(3));
+                Dictionary<string, object> Personeel = new()
+                {
+                    { "personeelid", reader.GetInt64(0) },
+                    { "rankid", reader.GetInt64(1) },
+                    { "personeelsnaam", reader.GetString(2) },
+                    { "password", reader.GetString(3) }
+                };
                 Program.personeel.Add(Personeel);
                 
             }
