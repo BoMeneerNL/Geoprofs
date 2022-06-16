@@ -11,7 +11,7 @@ namespace Geoprofs
         public static async Task Main(string[] args)
         {
             CreateHostBuilder(args).Build().Run();
-            await Database.create.jeffAsync();
+            await Database.Select.SelectQuery();
         }
 
         public static IHostBuilder CreateHostBuilder(string[] args) =>
