@@ -5,9 +5,9 @@ using System.Threading.Tasks;
 
 namespace Geoprofs.Database
 {
-    public class Delete
+    public class Update
     {
-        public static async Task DeleteQuery(int personeelid)
+        public static async Task UpdateQuery()
         {
             Program.personeel = new();
             using var connection = new MySqlConnection(
@@ -15,8 +15,8 @@ namespace Geoprofs.Database
             );
             await connection.OpenAsync();
 
-            using var query = new MySqlCommand("DELETE FROM personeel WHERE personeelid='" + personeelid + "'", connection);
-            using var reader = await query.ExecuteReaderAsync();
+            using var query = new MySqlCommand("");
+            //using var reader = await query.ExecuteReaderAsync();
         }
     }
 }

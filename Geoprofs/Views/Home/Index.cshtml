@@ -2,18 +2,10 @@
     await Geoprofs.Database.Select.SelectQuery();
     @*await Geoprofs.Database.Insert.InsertQuery();*@
     @*await Geoprofs.Database.Update.UpdateQuery();*@
-    //await Geoprofs.Database.Delete.DeleteQuery();
 
     ViewData["Title"] = "Personeelsoverzicht";
     string[] columns = { "ID", "RANK", "NAAM", "WACHTWOORD", "ACTIES" };
     List<Dictionary<string, object>> obj = Program.personeel;
-}
-
-@functions{
-    public string GetHello()
-    {
-        return "Hello";
-    }
 }
 
 <table class="table">
@@ -29,13 +21,13 @@
         @for (int i = 0; i < obj.Count; i++)
         {
             <tr>
-                <td><b>@obj[i]["personeelid"]</b></td>
+                <td id="@obj[i]["personeelid"]"><b>@obj[i]["personeelid"]</b></td>
                 <td><b>@obj[i]["rankid"]</b></td>
                 <td>@obj[i]["personeelsnaam"]</td>
                 <td>@obj[i]["password"]</td>
                 <td>
-                    <button onclick="RazorFunction()">Aanpassen</button>
-                    <button onclick="RazorFunction()">Verwijderen</button>
+                    <button>Aanpassen</button>
+                    <button onclick="verwijderPersoneel(@obj[i]["personeelid"])">Verwijderen</button>
                 </td>
             </tr>
         }
@@ -45,8 +37,15 @@
 @section Scripts
 {
     <script>
-        function RazorFunction() {
-            $("button").html('@GetHello()');
+        async function verwijderPersoneel(int id) {
+            int test = test;
+
+
+            @{
+                @*await Geoprofs.Database.Delete.DeleteQuery(id);*@
+            }
+
+            location.reload();
         }
     </script>
 }
