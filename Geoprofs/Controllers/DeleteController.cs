@@ -22,7 +22,7 @@ namespace Geoprofs.Controllers
         public IActionResult User(int id)
         {
             ContentResult findechat = (ContentResult)ControllerContext.MyDisplayRouteInfo(id);
-            ViewData["id"] = long.Parse(findechat.Content.Split(' ', StringSplitOptions.RemoveEmptyEntries)[3]);
+            ViewData["id"] = int.Parse(findechat.Content.Split(' ', StringSplitOptions.RemoveEmptyEntries)[3]);
 
             return View();
 
