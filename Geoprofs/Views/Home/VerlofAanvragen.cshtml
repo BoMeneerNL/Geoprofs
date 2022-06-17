@@ -1,0 +1,34 @@
+﻿@{
+    ViewData["Title"] = "Verlof aanvragen";
+}
+
+
+
+<form action="">
+  <div class="form-container">
+    <h1>Verlof aanvragen</h1>
+    <p>Vul dit formulier in om verlof aan te vragen</p>
+    <hr>
+
+    <label for="vanaf"><b>Vanaf</b></label>
+    <input type="date" placeholder="Vanaf datum" name="vanaf" id="vanaf" required>
+
+    <label for="tot"><b>Tot</b></label>
+    <input type="date" placeholder="Tot datum" name="tot" id="tot" min="" required>
+    
+    <label for="beschrijving"><b>Beschrijving</b></label>
+    <textarea  placeholder="Beschrijving" name="beschrijving" id="beschrijving" required></textarea>
+    <hr>
+
+    <button type="submit" class="btn">Vraag aan</button>
+  </div>
+</form>
+<script>
+    //Dit zorgt ervoor dat mensen niet de tot datum eerder kunnen maken dan de vanaf datum
+    document.getElementById("vanaf").addEventListener("change", function(){
+       console.log("test");
+        var firstdate = document.getElementById("vanaf").value;
+        document.getElementById("tot").value = "";
+        document.getElementById("tot").setAttribute("min",firstdate);
+    });
+</script>
