@@ -7,7 +7,7 @@ namespace Geoprofs.Database
 {
     public class Delete
     {
-        public static async Task DeleteQuery(int personeelid)
+        public static async Task DeleteUser(int personeelid)
         {
             Program.personeel = new();
             using var connection = new MySqlConnection(

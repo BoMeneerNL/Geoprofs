@@ -27,9 +27,17 @@
                 <td>@obj[i]["password"]</td>
                 <td>
                     <button>Aanpassen</button>
-                    <button>Verwijderen</button>
+                    <button onclick="deleteuser(@obj[i]["personeelid"])">Verwijderen</button>
                 </td>
             </tr>
         }
     </tbody>
 </table>
+@section Scripts{
+    <script>
+        function deleteuser(id){
+            fetch('https://localhost:5001/Delete/User/' + id)
+            .then((response)=>window.location.reload())
+        }
+    </script>
+}
