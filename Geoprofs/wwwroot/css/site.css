@@ -140,3 +140,13 @@ hr {
 a {
     color: dodgerblue;
 }
+
+
+/* Tables */
+table {
+    text-align: center;
+}
+
+tr:nth-child(odd) {
+    background: #eeeeee;
+}

@@ -7,6 +7,7 @@
     string[] columns = { "ID", "PERSONEEL", "TYPE", "OMSCHRIJVING", "VAN", "TOT", "STATUS", "ACTIES" };
     List<Dictionary<string, object>> obj = Program.verlof;
 }
+
 <table class="table">
     <thead class="thead-dark">
         <tr>
@@ -28,8 +29,8 @@
                 <td>@obj[i]["tot"]</td>
                 <td>@obj[i]["status"]</td>
                 <td>
-                    <button>Aanpassen</button>
-                    <button>Verwijderen</button>
+                    <button>Goedkeuren</button>
+                    <button>Afkeuren</button>
                 </td>
             </tr>
         }
