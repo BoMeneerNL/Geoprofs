@@ -1,0 +1,6 @@
+﻿@{
+    ViewData["Title"] = "Loading... Deletion...";
+
+    await Geoprofs.Database.Delete.DeleteQuery(0);
+}
+<p>@ViewData["id"]</p>
