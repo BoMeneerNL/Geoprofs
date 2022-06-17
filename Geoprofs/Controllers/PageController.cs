@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Geoprofs.Controllers
 {
-    public class HomeController : Controller
+    public class PageController : Controller
     {
         private readonly ILogger<PageController> _logger;
 
