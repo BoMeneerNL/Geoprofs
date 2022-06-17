@@ -1,0 +1,5 @@
+﻿@{
+    ViewData["Title"] = "Loading... Deletion...";
+
+    await Geoprofs.Database.Delete.DeleteUser(int.Parse(ViewData["id"].ToString()));
+}

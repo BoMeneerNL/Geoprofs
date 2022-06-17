@@ -56,6 +56,10 @@ namespace Geoprofs
                 endpoints.MapControllerRoute(
                     name: "default",
                     pattern: "{controller=Page}/{action=Index}/{id?}");
+                endpoints.MapControllerRoute(
+                    name: "delete",
+                    pattern: "{controller=Delete}/{id?}"
+                    );
             });
         }
     }
