@@ -11,9 +11,9 @@ namespace Geoprofs.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
+        private readonly ILogger<PageController> _logger;
 
-        public HomeController(ILogger<HomeController> logger)
+        public PageController(ILogger<PageController> logger)
         {
             _logger = logger;
         }

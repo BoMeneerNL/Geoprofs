@@ -39,7 +39,7 @@ namespace Geoprofs
             }
             else
             {
-                app.UseExceptionHandler("/Home/Error");
+                app.UseExceptionHandler("/Page/Error");
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
@@ -55,11 +55,7 @@ namespace Geoprofs
             {
                 endpoints.MapControllerRoute(
                     name: "default",
-                    pattern: "{controller=Home}/{action=Index}/{id?}");
-                endpoints.MapControllerRoute(
-                    name:"register",
-                    pattern:"/{action=Register}"
-                    );
+                    pattern: "{controller=Page}/{action=Index}/{id?}");
             });
         }
     }
