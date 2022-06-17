@@ -3,18 +3,21 @@
 }
 
 <form action="">
-  <div class="form-container">
-    <h1>Account login</h1>
-    <p>Vul dit formulier in om in te loggen</p>
-    <hr>
+    <div class="form-container">
+        <h1>Account login</h1>
+        <p>Vul dit formulier in om in te loggen</p>
+        <hr>
 
-    <label for="email"><b>Email</b></label>
-    <input type="text" placeholder="Vul Email-adres in" name="email" id="email" required>
+        <label for="email"><b>Email</b></label>
+        <input type="text" placeholder="Vul Email-adres in" name="email" id="email" required>
 
-    <label for="password"><b>Wachtwoord</b></label>
-    <input type="password" placeholder="Vul wachtwoord in" name="password" id="password" required>
-    <hr>
+        <label for="password"><b>Wachtwoord</b></label>
+        <input type="password" placeholder="Vul wachtwoord in" name="password" id="password" required>
+        <hr>
 
-    <button type="submit" class="btn">Login</button>
-  </div>
+        <button type="submit" class="btn">Login</button>
+    </div>
+    <div style="display: flex; align-items: center; justify-content: center;">
+        <p>Geen account?<a style="padding: 0;" class="nav-link text-dark" asp-area="" asp-controller="page" asp-action="register">Meld je aan</a></p>
+    </div>
 </form>
