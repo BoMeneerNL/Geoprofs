@@ -1,13 +1,12 @@
 ﻿@{
-    await Geoprofs.Database.Select.PersoneelSelectQuery();
+    await Geoprofs.Database.Select.VerlofSelectQuery();
     @*await Geoprofs.Database.Insert.InsertQuery();*@
     @*await Geoprofs.Database.Update.UpdateQuery();*@
 
-    ViewData["Title"] = "Personeelsoverzicht";
-    string[] columns = { "ID", "RANK", "NAAM", "WACHTWOORD", "ACTIES" };
-    List<Dictionary<string, object>> obj = Program.personeel;
+    ViewData["Title"] = "Verlofoverzicht";
+    string[] columns = { "ID", "PERSONEEL", "TYPE", "OMSCHRIJVING", "VAN", "TOT", "STATUS", "ACTIES" };
+    List<Dictionary<string, object>> obj = Program.verlof;
 }
-
 <table class="table">
     <thead class="thead-dark">
         <tr>
@@ -21,10 +20,13 @@
         @for (int i = 0; i < obj.Count; i++)
         {
             <tr>
+                <td><b>@obj[i]["verlofid"]</b></td>
                 <td><b>@obj[i]["personeelid"]</b></td>
-                <td><b>@obj[i]["rankid"]</b></td>
-                <td>@obj[i]["personeelsnaam"]</td>
-                <td>@obj[i]["password"]</td>
+                <td>@obj[i]["verloftypeid"]</td>
+                <td>@obj[i]["verlofomschrijving"]</td>
+                <td>@obj[i]["van"]</td>
+                <td>@obj[i]["tot"]</td>
+                <td>@obj[i]["status"]</td>
                 <td>
                     <button>Aanpassen</button>
                     <button>Verwijderen</button>
@@ -33,3 +35,4 @@
         }
     </tbody>
 </table>
+    

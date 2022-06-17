@@ -7,7 +7,7 @@ namespace Geoprofs.Database
 {
     public class Update
     {
-        public static async Task UpdateQuery()
+        public static async Task UpdateQuery(int personeelid)
         {
             Program.personeel = new();
             using var connection = new MySqlConnection(

@@ -8,10 +8,13 @@ namespace Geoprofs
     public class Program
     {
         public static List<Dictionary<string,object>> personeel = new();
+        public static List<Dictionary<string, object>> verlof = new();
         public static async Task Main(string[] args)
         {
             CreateHostBuilder(args).Build().Run();
-            await Database.Select.SelectQuery();
+            await Database.Select.PersoneelSelectQuery();
+            await Database.Select.VerlofSelectQuery();
+
         }
 
         public static IHostBuilder CreateHostBuilder(string[] args) =>
