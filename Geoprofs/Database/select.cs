@@ -20,7 +20,6 @@ namespace Geoprofs.Database
 
             while (await reader.ReadAsync())
             {
-//<<<<<<< Updated upstream:Geoprofs/Database/create.cs
                 Dictionary<string, object> Personeel = new()
                 {
                     { "personeelid", reader.GetInt64(0) },
@@ -28,15 +27,6 @@ namespace Geoprofs.Database
                     { "personeelsnaam", reader.GetString(2) },
                     { "password", reader.GetString(3) }
                 };
-//=======
-                //Dictionary<string, object> Personeel = new();
-
-                Personeel.Add("personeelid", reader.GetInt64(0));
-                Personeel.Add("rankid", reader.GetInt64(1));
-                Personeel.Add("personeelsnaam", reader.GetString(2));
-                Personeel.Add("password", reader.GetString(3));
-
-//>>>>>>> Stashed changes:Geoprofs/Database/select.cs
                 Program.personeel.Add(Personeel);
             }
         }
