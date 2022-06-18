@@ -1,6 +1,5 @@
 ﻿using MySqlConnector;
 using System.Collections.Generic;
-using System.Data;
 using System.Threading.Tasks;
 
 namespace Geoprofs.Database
@@ -75,14 +74,37 @@ namespace Geoprofs.Database
                     { "verlofid", reader.GetInt64(0) },
                     { "tot", reader.GetDateOnly(1) },
                     { "personeelid", reader.GetInt64(2) },
-                    { "verloftypeid", reader.GetInt64(3) },
+                    { "verloftypeid", getVerloftypeRep(reader.GetInt64(3)) },
                     { "verlofomschrijving", reader.GetString(4) },
                     { "van", reader.GetDateOnly(5) },
-                    { "status", reader.GetInt64(6) },
+                    { "status", getStatusRep(reader.GetInt64(6)) },
                 };
 
                 Program.verlof.Add(Verlof);
             }
+        }
+
+        private static string getStatusRep(long v)
+        {
+            return v switch
+            {
+                1 => "Goedgekeurd",
+                2 => "Afgekeurd",
+                3 => "Geen reactie",
+                _ => "Error: NotParsableReturnValue"
+            };
+        }
+        private static string getVerloftypeRep(long v)
+        {
+            return v switch
+            {
+                1 => "Ziekte verzuim",
+                2 => "Vakantie",
+                3 => "Overig geoorloofd verzuim",
+                4 => "Ongeoorloofd verzuim",
+                5 => "Onbekend",
+                _ => "Error: NotParsableReturnValue"
+            };
         }
     }
 }
