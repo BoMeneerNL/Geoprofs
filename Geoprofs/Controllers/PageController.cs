@@ -24,9 +24,9 @@ namespace Geoprofs.Controllers
             return View();
         }
 
-        public IActionResult Update(int personeelid)
+        public IActionResult Update(int id)
         {
-            ContentResult findechat = (ContentResult)ControllerContext.MyDisplayRouteInfo(personeelid);
+            ContentResult findechat = (ContentResult)ControllerContext.MyDisplayRouteInfo(id);
             ViewData["id"] = int.Parse(findechat.Content.Split(' ', StringSplitOptions.RemoveEmptyEntries)[3]);
 
             return View();

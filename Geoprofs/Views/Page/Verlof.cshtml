@@ -30,9 +30,18 @@
                 <td>
                     <button>Goedkeuren</button>
                     <button>Afkeuren</button>
+                    <button onclick="deleteverlof(@obj[i]["verlofid"])">Verlofaanvraag verwijderen</button>
                 </td>
             </tr>
         }
     </tbody>
 </table>
+@section Scripts{
+    <script>
+        function deleteverlof(id){
+            fetch('https://'+window.location.host +'/Delete/Verlof/' + id)
+            .then(()=>window.location.reload())
+        }
+    </script>
+}
     
