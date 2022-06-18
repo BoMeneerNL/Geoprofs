@@ -15,19 +15,18 @@ namespace Geoprofs.Controllers
         {
             _logger = logger;
         }
-
         public IActionResult User(int id)
         {
-            ContentResult findechat = (ContentResult)ControllerContext.MyDisplayRouteInfo(id);
-            ViewData["id"] = int.Parse(findechat.Content.Split(' ', StringSplitOptions.RemoveEmptyEntries)[3]);
+            //old
+            //ContentResult findechat = (ContentResult)ControllerContext.MyDisplayRouteInfo(id);
+            //ViewData["id"] = int.Parse(findechat.Content.Split(' ', StringSplitOptions.RemoveEmptyEntries)[3])
+            ViewData["id"] = id;
 
             return View();
         }
         public IActionResult Verlof(int id)
         {
-            ContentResult findechat = (ContentResult)ControllerContext.MyDisplayRouteInfo(id);
-            ViewData["id"] = int.Parse(findechat.Content.Split(' ', StringSplitOptions.RemoveEmptyEntries)[3]);
-
+            ViewData["id"] = id;
             return View();
 
         }

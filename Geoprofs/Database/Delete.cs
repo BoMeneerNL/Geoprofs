@@ -1,6 +1,4 @@
 ﻿using MySqlConnector;
-using System.Collections.Generic;
-using System.Data;
 using System.Threading.Tasks;
 
 namespace Geoprofs.Database

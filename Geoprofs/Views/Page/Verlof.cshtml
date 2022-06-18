@@ -39,7 +39,7 @@
 @section Scripts{
     <script>
         function deleteverlof(id){
-            fetch('https://'+window.location.host +'/Delete/Verlof/' + id)
+            fetch('/delete/Verlof/' + id)
             .then(()=>window.location.reload())
         }
     </script>

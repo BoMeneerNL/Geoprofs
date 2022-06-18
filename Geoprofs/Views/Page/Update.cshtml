@@ -2,9 +2,21 @@
     ViewData["Title"] = "Loading... Deletion...";
 
     await Geoprofs.Database.Select.PersoneelSelectQuery();
+    if (ViewData["id"].ToString() == "0")
+    {
 
-    var jeff = Program.personeel[int.Parse(ViewData["id"].ToString())];
+    }
+    else
+    {
+        try { 
+        var jeff = Program.personeel[int.Parse(ViewData["id"].ToString())]; 
+        <p>@jeff["personeelid"]</p>
+    }
+    catch{
+        <h1>Error: 400</h1>
+    }
+    }
+    
 
 }
 
-<p>@jeff["personeelid"]</p>
