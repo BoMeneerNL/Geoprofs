@@ -17,6 +17,31 @@ namespace Geoprofs.Database
 
             using var query = new MySqlCommand("SELECT * FROM personeel", connection);
             using var reader = await query.ExecuteReaderAsync();
+            int linkageid = 0;
+            while (await reader.ReadAsync())
+            {
+                Dictionary<string, object> Personeel = new()
+                {
+                    { "personeelid", reader.GetInt64(0) },
+                    { "rankid", reader.GetInt64(1) },
+                    { "personeelsnaam", reader.GetString(2) },
+                    { "password", reader.GetString(3) },
+                    { "linkageid", linkageid }
+                };
+                linkageid++;
+                Program.personeel.Add(Personeel);
+            }
+        }
+        public static async Task SelectQuery(int personeelid)
+        {
+            Program.personeel = new();
+            using var connection = new MySqlConnection(
+                "server=localhost;user=geoprofs;password=guiSs*X*Gk!pPyrK;database=geoprofs"
+            );
+            await connection.OpenAsync();
+
+            using var query = new MySqlCommand("SELECT * FROM personeel WHERE personeelid='" + personeelid + "'", connection);
+            using var reader = await query.ExecuteReaderAsync();
 
             while (await reader.ReadAsync())
             {

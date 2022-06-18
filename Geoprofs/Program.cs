@@ -14,7 +14,6 @@ namespace Geoprofs
             CreateHostBuilder(args).Build().Run();
             await Database.Select.PersoneelSelectQuery();
             await Database.Select.VerlofSelectQuery();
-
         }
 
         public static IHostBuilder CreateHostBuilder(string[] args) =>
