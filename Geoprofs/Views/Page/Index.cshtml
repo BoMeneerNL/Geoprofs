@@ -1,7 +1,6 @@
 ﻿@{
     await Geoprofs.Database.Select.PersoneelSelectQuery();
     @*await Geoprofs.Database.Insert.InsertQuery();*@
-    @*await Geoprofs.Database.Update.UpdateQuery();*@
 
     ViewData["Title"] = "Personeelsoverzicht";
     string[] columns = { "ID", "RANK", "NAAM", "WACHTWOORD", "ACTIES" };

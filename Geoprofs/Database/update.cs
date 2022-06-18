@@ -15,8 +15,10 @@ namespace Geoprofs.Database
             );
             await connection.OpenAsync();
 
-            using var query = new MySqlCommand("");
-            //using var reader = await query.ExecuteReaderAsync();
+            using var query = new MySqlCommand(
+                "UPDATE personeel SET personeelnaam 'test' WHERE personeelid='" + personeelid + "'", connection
+            );
+            using var reader = await query.ExecuteReaderAsync();
         }
     }
 }
