@@ -1,5 +1,6 @@
 ﻿using Geoprofs.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Docs.Samples;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
@@ -20,6 +21,14 @@ namespace Geoprofs.Controllers
 
         public IActionResult Index()
         {
+            return View();
+        }
+
+        public IActionResult Update(int personeelid)
+        {
+            ContentResult findechat = (ContentResult)ControllerContext.MyDisplayRouteInfo(personeelid);
+            ViewData["id"] = int.Parse(findechat.Content.Split(' ', StringSplitOptions.RemoveEmptyEntries)[3]);
+
             return View();
         }
 

@@ -1,0 +1,10 @@
+﻿@{
+    ViewData["Title"] = "Loading... Deletion...";
+
+    await Geoprofs.Database.Select.PersoneelSelectQuery
+
+    var jeff = Program.personeel[int.Parse(ViewData["id"].ToString())];
+
+}
+
+<p>@jeff["personeelid"]</p>

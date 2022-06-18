@@ -26,7 +26,7 @@
                 <td>@obj[i]["personeelsnaam"]</td>
                 <td>@obj[i]["password"]</td>
                 <td>
-                    <button>Aanpassen</button>
+                    <button><a href="/Page/Update/@obj[i]["linkageid"]">Aanpassen</a></button>
                     <button onclick="deleteuser(@obj[i]["personeelid"])">Verwijderen</button>
                 </td>
             </tr>
@@ -35,6 +35,10 @@
 </table>
 @section Scripts{
     <script>
+        function updateUser(id) {
+            Response.Redirect("Page/Update");
+        }
+
         function deleteuser(id){
             fetch('https://localhost:5001/Delete/User/' + id)
             .then((response)=>window.location.reload())
