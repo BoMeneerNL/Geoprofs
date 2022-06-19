@@ -1,6 +1,5 @@
 ﻿@{
     await Geoprofs.Database.Select.PersoneelSelectQuery();
-    @*await Geoprofs.Database.Insert.InsertQuery();*@
 
     ViewData["Title"] = "Personeelsoverzicht";
     string[] columns = { "ID", "RANK", "NAAM", "WACHTWOORD", "ACTIES" };
@@ -25,7 +24,7 @@
                 <td>@obj[i]["personeelsnaam"]</td>
                 <td>@obj[i]["password"]</td>
                 <td>
-                    <button><a href="/Page/Update/@obj[i]["linkageid"]">Aanpassen</a></button>
+                    <button><a style="text-decoration: none;color:black;" href="/Page/Update/@obj[i]["linkageid"]">Aanpassen</a></button>
                     <button onclick="deleteuser(@obj[i]["personeelid"])">Verwijderen</button>
                 </td>
             </tr>

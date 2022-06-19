@@ -46,6 +46,11 @@
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
+    <script>
+        if(@Program.currentuser.rankid < 1 && !window.location.href.toLowerCase().startsWith("https://localhost:44390/page/login")){
+            window.location.href = "https://" + window.location.host + "/page/login";
+        }
+    </script>
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>
