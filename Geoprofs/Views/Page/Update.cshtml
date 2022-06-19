@@ -1,26 +1,10 @@
 ﻿@{
     ViewData["Title"] = "Loading... Deletion...";
     await Geoprofs.Database.Select.PersoneelSelectQuery();
-
-    // hallo bo deze jeff wordt voor nu even gebruikt
     var jeff = Program.personeel[int.Parse(ViewData["id"].ToString())];
 
-    if (ViewData["id"].ToString() == "0")
-    {
-        
-    }
-    else
-    {
-        try
-        {
-            //var jeff = Program.personeel[int.Parse(ViewData["id"].ToString())];
-        }
-        catch
-        {
-    <h1>Error: 400</h1>
-        }
-    }
-
+    
+    //await Geoprofs.Database.Update.UpdateQuery(jeff);
 }
 
 <div class="card">
@@ -28,35 +12,38 @@
         <b>PERSONEELGEGEVENS AANPASSEN</b>
     </div>
     <div class="card-body" style="font-weight: bold;">
-        <form method="post" action="{{ route('films.update', $film->id) }}" style="text-transform: capitalize;">
             <div class="form-group">
                 <label>ID</label>
                 <input class="form-control" value="@jeff["personeelid"]" style="font-weight: bold" readonly />
             </div>
             <div class="form-group">
                 <label>RANKID</label>
-                <input type="number" class="form-control" name="jaar" value="@jeff["rankid"]" />
+                <input id="rankid" type="number" class="form-control" name="jaar" value="@jeff["rankid"]" />
             </div>
             <div class="form-group">
                 <label>PERSONEELSNAAM</label>
-                <input type="text" class="form-control" name="genre" value="@jeff["personeelsnaam"]" />
+                <input id="personeelsnaam" type="text" class="form-control" name="genre" value="@jeff["personeelsnaam"]" />
             </div>
             <div class="form-group">
                 <label>WACHTWOORD</label>
-                <input type="text" class="form-control" name="tijdsduur" value="@jeff["password"]" />
+                <input id="password" type="text" class="form-control" name="tijdsduur" value="@jeff["password"]" />
             </div>
-            <button type="submit" class="btn btn-block btn-primary">Aanpassen</button>
+            <button onclick="updateuser()" type="submit" class="btn btn-block btn-primary">Aanpassen</button>
             <a href="/" class="btn btn-block btn-danger">
                 Annuleren
             </a>
-        </form>
     </div>
 </div>
 
 @section Scripts{
     <script>
-        async function deleteuser(id){
-            //await Geoprofs.Database.Update.UpdateQuery(int.Parse(ViewData["id"]));
+function updateuser() {
+    id = @jeff["personeelid"];
+    rankid = document.getElementById("rankid").value;
+    personeelsnaam = document.getElementById("personeelsnaam").value;
+    password = document.getElementById("password").value;
+    fetch('/Update/User/' +id + "/" + rankid + '/' + personeelsnaam + '/'+password)
+        .then(() => {window.location.href="/" })
         }
     </script>
 }

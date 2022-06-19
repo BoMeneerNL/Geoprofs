@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Docs.Samples;
 using Microsoft.Extensions.Logging;
+using MySqlConnector;
 using System;
 using System.Diagnostics;
 
@@ -22,14 +23,13 @@ namespace Geoprofs.Controllers
         public IActionResult Login() => View();
         public IActionResult Verlofaanvragen() => View();
         public IActionResult Verlof() => View();
-        
+
         public IActionResult Update(int id)
         {
             ViewData["id"] = id;
+
+
             return View();
         }
-
-        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-        public IActionResult Error()=> View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
     }
 }
