@@ -1,10 +1,7 @@
 ﻿@{
-    ViewData["Title"] = "Loading... Deletion...";
+    ViewData["Title"] = "Personeelgegevens aanpassen";
     await Geoprofs.Database.Select.PersoneelSelectQuery();
     var jeff = Program.personeel[int.Parse(ViewData["id"].ToString())];
-
-    
-    //await Geoprofs.Database.Update.UpdateQuery(jeff);
 }
 
 <div class="card">
