@@ -4,8 +4,12 @@
     ViewData["Title"] = "Personeelsoverzicht";
     string[] columns = { "ID", "RANK", "NAAM", "WACHTWOORD", "ACTIES" };
     List<Dictionary<string, object>> obj = Program.personeel;
+    if(Program.currentuser.rankid == 10)
+    {
+        <button><a href="/Page/Register">Nieuwe personeel</a></button>
+    }
 }
-<button><a href="/Page/Register">Nieuwe personeel</a></button>
+
 <table class="table">
     <thead class="thead-dark">
         <tr>

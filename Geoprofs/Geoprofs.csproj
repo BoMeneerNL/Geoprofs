@@ -16,4 +16,8 @@
     <None Remove="Microsoft.VisualStudio.Web.CodeGeneration.Design" />
     <None Remove="Swashbuckle.AspNetCore" />
   </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Views\Login\" />
+  </ItemGroup>
 </Project>
