@@ -35,8 +35,8 @@
 @section Scripts{
     <script>
         function deleteuser(id){
-            fetch('https://localhost:5001/Delete/User/' + id)
-            .then((response)=>window.location.reload())
+            fetch('/delete/Verlof/' + id)
+            .then(()=>window.location.reload())
         }
     </script>
 }

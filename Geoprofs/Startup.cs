@@ -55,6 +55,10 @@ namespace Geoprofs
                     name: "delete",
                     pattern: "{controller=Delete}/{id?}"
                     );
+                endpoints.MapControllerRoute(
+                    name: "update",
+                    pattern: "{controller=Update}/{action=User}/{personeelid}/{rankid}/{personeelsnaam}/{password}"
+                    );
             });
         }
     }

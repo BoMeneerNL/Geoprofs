@@ -16,8 +16,4 @@
     <None Remove="Microsoft.VisualStudio.Web.CodeGeneration.Design" />
     <None Remove="Swashbuckle.AspNetCore" />
   </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Views\Update\" />
-  </ItemGroup>
 </Project>
