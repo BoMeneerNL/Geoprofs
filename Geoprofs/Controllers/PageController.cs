@@ -27,8 +27,6 @@ namespace Geoprofs.Controllers
         public IActionResult Update(int id)
         {
             ViewData["id"] = id;
-
-
             return View();
         }
     }
