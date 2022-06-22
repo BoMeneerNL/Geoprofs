@@ -17,5 +17,16 @@ namespace Geoprofs.Database
             query.Connection = connection;
             query.ExecuteNonQuery();
         }
+
+        public static async Task UpdateVerlofStatus(int id, int status)
+        {
+            using var connection = new MySqlConnection(
+                "server=localhost;user=geoprofs;password=guiSs*X*Gk!pPyrK;database=geoprofs"
+            );
+            await connection.OpenAsync();
+            using var query = new MySqlCommand($"UPDATE verlof SET status={status} WHERE VerlofID={id}");
+            query.Connection = connection;
+            query.ExecuteNonQuery();
+        }
     }
 }

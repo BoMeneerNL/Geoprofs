@@ -7,6 +7,7 @@
     string[] columns = { "ID", "PERSONEEL", "TYPE", "OMSCHRIJVING", "VAN", "TOT", "STATUS", "ACTIES" };
     List<Dictionary<string, object>> obj = Program.verlof;
 }
+
 <table class="table">
     <thead class="thead-dark">
         <tr>
@@ -28,8 +29,8 @@
                 <td>@obj[i]["tot"]</td>
                 <td>@obj[i]["status"]</td>
                 <td>
-                    <button>Goedkeuren</button>
-                    <button>Afkeuren</button>
+                    <button onclick="updateVelof(@obj[i]["verlofid"], 1)">Goedkeuren</button>
+                    <button onclick="updateVelof(@obj[i]["verlofid"], 2)">Afkeuren</button>
                     <button onclick="deleteverlof(@obj[i]["verlofid"])">Verwijderen</button>
                 </td>
             </tr>
@@ -40,6 +41,11 @@
     <script>
         function deleteverlof(id){
             fetch('/delete/Verlof/' + id)
+            .then(()=>window.location.reload())
+        }
+
+        function updateVelof(id, status){
+            fetch('/update/VerlofStatusChange/' + id + '/' + status)
             .then(()=>window.location.reload())
         }
     </script>
