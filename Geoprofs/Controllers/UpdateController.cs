@@ -13,5 +13,14 @@ namespace Geoprofs.Controllers
 
             return View();
         }
+
+        public IActionResult VerlofStatusChange(int id, int status)
+        {
+            ViewData["id"] = id;
+            ViewData["status"] = status;
+
+            return View();
+
+        }
     }
 }
