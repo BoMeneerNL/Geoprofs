@@ -1,6 +1,4 @@
 ﻿using MySqlConnector;
-using System.Collections.Generic;
-using System.Data;
 using System.Threading.Tasks;
 
 namespace Geoprofs.Database
@@ -16,6 +14,17 @@ namespace Geoprofs.Database
             await connection.OpenAsync();
 
             using var query = new MySqlCommand("DELETE FROM personeel WHERE personeelid='" + personeelid + "'", connection);
+            using var reader = await query.ExecuteReaderAsync();
+        }
+        public static async Task DeleteVerlof(int verlofid)
+        {
+            Program.verlof = new();
+            using var connection = new MySqlConnection(
+                "server=localhost;user=geoprofs;password=guiSs*X*Gk!pPyrK;database=geoprofs"
+            );
+            await connection.OpenAsync();
+
+            using var query = new MySqlCommand("DELETE FROM verlof WHERE verlofid='" + verlofid + "'", connection);
             using var reader = await query.ExecuteReaderAsync();
         }
     }

@@ -1,11 +1,13 @@
 ﻿@{
     await Geoprofs.Database.Select.PersoneelSelectQuery();
-    @*await Geoprofs.Database.Insert.InsertQuery();*@
-    @*await Geoprofs.Database.Update.UpdateQuery();*@
 
     ViewData["Title"] = "Personeelsoverzicht";
     string[] columns = { "ID", "RANK", "NAAM", "WACHTWOORD", "ACTIES" };
     List<Dictionary<string, object>> obj = Program.personeel;
+    if(Program.currentuser.rankid == 10)
+    {
+        <button><a href="/Page/Register">Nieuwe personeel</a></button>
+    }
 }
 
 <table class="table">
@@ -26,7 +28,7 @@
                 <td>@obj[i]["personeelsnaam"]</td>
                 <td>@obj[i]["password"]</td>
                 <td>
-                    <button>Aanpassen</button>
+                    <button><a style="text-decoration: none;color:black;" href="/Page/Update/@obj[i]["linkageid"]">Aanpassen</a></button>
                     <button onclick="deleteuser(@obj[i]["personeelid"])">Verwijderen</button>
                 </td>
             </tr>
@@ -36,8 +38,8 @@
 @section Scripts{
     <script>
         function deleteuser(id){
-            fetch('https://localhost:5001/Delete/User/' + id)
-            .then((response)=>window.location.reload())
+            fetch('/delete/Verlof/' + id)
+            .then(()=>window.location.reload())
         }
     </script>
 }

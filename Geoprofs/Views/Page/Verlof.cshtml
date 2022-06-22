@@ -31,9 +31,18 @@
                 <td>
                     <button>Goedkeuren</button>
                     <button>Afkeuren</button>
+                    <button onclick="deleteverlof(@obj[i]["verlofid"])">Verwijderen</button>
                 </td>
             </tr>
         }
     </tbody>
 </table>
+@section Scripts{
+    <script>
+        function deleteverlof(id){
+            fetch('/delete/Verlof/' + id)
+            .then(()=>window.location.reload())
+        }
+    </script>
+}
     

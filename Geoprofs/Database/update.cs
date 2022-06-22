@@ -7,16 +7,15 @@ namespace Geoprofs.Database
 {
     public class Update
     {
-        public static async Task UpdateQuery(int personeelid)
+        public static async Task UpdateUser(int personeelid, int rankid, string personeelsnaam, string password)
         {
-            Program.personeel = new();
             using var connection = new MySqlConnection(
                 "server=localhost;user=geoprofs;password=guiSs*X*Gk!pPyrK;database=geoprofs"
             );
             await connection.OpenAsync();
-
-            using var query = new MySqlCommand("");
-            //using var reader = await query.ExecuteReaderAsync();
+            using var query = new MySqlCommand($"UPDATE personeel SET RankID={rankid}, PersoneelsNaam='{personeelsnaam}', Password='{password}' WHERE PersoneelID={personeelid}");
+            query.Connection = connection;
+            query.ExecuteNonQuery();
         }
     }
 }
