@@ -8,7 +8,7 @@
 
         public User()
         {
-            personeelid = 9;
+            personeelid = 0;
             rankid = 0;
             personeelsnaam = "NIET INGELOGD";
         }
