@@ -33,7 +33,6 @@ namespace Geoprofs.Database
         }
         public static async Task SelectQuery(int personeelid)
         {
-            Program.personeel = new();
             using var connection = new MySqlConnection(
                 "server=localhost;user=geoprofs;password=guiSs*X*Gk!pPyrK;database=geoprofs"
             );
