@@ -60,6 +60,10 @@ namespace Geoprofs
                     pattern: "{controller=Update}/{action=User}/{personeelid}/{rankid}/{personeelsnaam}/{password}"
                     );
                 endpoints.MapControllerRoute(
+                        name: "verlof",
+                        pattern: "{controller=Update}/{action=VerlofStatusChange}/{id}/{status}"
+                    );
+                endpoints.MapControllerRoute(
                     name: "insert",
                     pattern: "{controller=Update}/{action=User}/{rankid}/{personeelsnaam}/{password}"
                     );
