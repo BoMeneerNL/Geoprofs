@@ -8,7 +8,10 @@
     List<Dictionary<string, object>> obj = Program.verlof;
 }
 
-<table class="table">
+
+@if (Program.currentuser.rankid == 10)
+{
+    <table class="table">
     <thead class="thead-dark">
         <tr>
             @foreach (string column in columns)
@@ -36,18 +39,63 @@
             </tr>
         }
     </tbody>
-</table>
-@section Scripts{
-    <script>
-        function deleteverlof(id){
-            fetch('/delete/Verlof/' + id)
-            .then(()=>window.location.reload())
-        }
+    </table>
+    @section Scripts{
+        <script>
+            function deleteverlof(id){
+                fetch('/delete/Verlof/' + id)
+                .then(()=>window.location.reload())
+            }
 
-        function updateVelof(id, status){
-            fetch('/update/VerlofStatusChange/' + id + '/' + status)
-            .then(()=>window.location.reload())
-        }
-    </script>
+            function updateVelof(id, status){
+                fetch('/update/VerlofStatusChange/' + id + '/' + status)
+                .then(()=>window.location.reload())
+            }
+        </script>
+    }
+} else
+{
+     <table class="table">
+        <thead class="thead-dark">
+            <tr>
+                @foreach (string column in columns)
+                {
+                    <th scope="col">@column</th>
+                }
+            </tr>
+        </thead>
+        <tbody>
+
+            @for (int i = 0; i < obj.Count; i++)
+            {
+                <p>@int.Parse(@obj[i]["personeelid"].ToString())</p>
+                if (int.Parse(@obj[i]["personeelid"].ToString()) == Program.currentuser.personeelid)
+                {
+                    <tr>
+                        <td><b>@obj[i]["verlofid"]</b></td>
+                        <td><b>@obj[i]["personeelid"]</b></td>
+                        <td>@obj[i]["verloftypeid"]</td>
+                        <td>@obj[i]["verlofomschrijving"]</td>
+                        <td>@obj[i]["van"]</td>
+                        <td>@obj[i]["tot"]</td>
+                        <td>@obj[i]["status"]</td>
+                        <td>
+                            <button onclick="deleteverlof(@obj[i]["verlofid"])">Verwijderen</button>
+                        </td>
+                    </tr>
+                }
+                
+            }
+        </tbody>
+    </table>
+    @section Scripts{
+        <script>
+            function deleteverlof(id){
+                fetch('/delete/Verlof/' + id)
+                .then(()=>window.location.reload())
+            }
+        </script>
+    }
 }
+
     
