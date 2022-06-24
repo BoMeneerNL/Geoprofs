@@ -12,6 +12,7 @@
 @if (Program.currentuser.rankid == 10)
 {
     <table class="table">
+    <a class="btn small-btn" href="/page/verlofaanvragen/">Vraag verlof aan</a>
     <thead class="thead-dark">
         <tr>
             @foreach (string column in columns)
@@ -56,6 +57,7 @@
 } else
 {
      <table class="table">
+        <a class="btn small-btn" href="/page/verlofaanvragen/">Vraag verlof aan</a>
         <thead class="thead-dark">
             <tr>
                 @foreach (string column in columns)

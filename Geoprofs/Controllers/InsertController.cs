@@ -19,7 +19,7 @@ namespace Geoprofs.Controllers
             ViewData["vanaf"] = vanaf;
             ViewData["tot"] = tot;
             ViewData["beschrijving"] = beschrijving;
-
+            
             return View();
         }
     }
