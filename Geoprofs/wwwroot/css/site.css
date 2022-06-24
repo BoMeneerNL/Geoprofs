@@ -136,6 +136,12 @@ hr {
         color: white;
     }
 
+.btn.small-btn {
+    max-width: 170px;
+    float: right;
+    margin-bottom: 13px;
+    background-color: #343a40;
+}
 /* Add a blue text color to links */
 a {
     color: dodgerblue;

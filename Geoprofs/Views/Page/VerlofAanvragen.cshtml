@@ -18,8 +18,7 @@
     <label for="beschrijving"><b>Beschrijving</b></label>
     <textarea  placeholder="Beschrijving" name="beschrijving" id="beschrijving" required></textarea>
     <hr>
-
-    <button type="submit" class="btn" onclick="vraagVerlofAan()">Vraag aan</button>
+    <button onclick="vraagVerlofAan()" type="submit" class="btn">Vraag aan</button>
   </div>
 
   @section Scripts{
@@ -38,10 +37,9 @@
                 let beschrijving = document.getElementById("beschrijving").value;
                 console.log(personeelid, vanaf, tot, beschrijving);
 
-                fetch('/Insert/Verlof/' + personeelid + '/' + vanaf + '/'+ tot + '/'+ beschrijving)
-                .then(() => { }) //window.location.href="/page/verlof"
-
-                //INSERT INTO verlof(PersoneelID, Van, Tot, VerlofOmschrijving, status, VerlofTypeID) VALUES(9, '2022-06-17', '2022-06-17', 'Test1', 1, 1);
-            }
+                if (vanaf !== "" && tot !== "" && beschrijving !== "") {
+                    fetch('/Insert/Verlof?personeelid=' + personeelid + '&vanaf=' + vanaf + '&tot='+ tot + '&beschrijving='+ beschrijving)
+                    .then(() => { window.location.href="/page/verlof/" })
+                }
         </script>
   }
