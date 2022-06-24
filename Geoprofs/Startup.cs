@@ -67,6 +67,10 @@ namespace Geoprofs
                     name: "insert",
                     pattern: "{controller=Update}/{action=User}/{rankid}/{personeelsnaam}/{password}"
                     );
+                endpoints.MapControllerRoute(
+                    name: "insert",
+                    pattern: "{controller=Insert}/{action=Verlof}/{personeelid}/{vanaf}/{tot}/{beschrijving}"
+                    );
             });
         }
     }
