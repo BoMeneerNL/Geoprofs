@@ -18,7 +18,6 @@
     <label for="beschrijving"><b>Beschrijving</b></label>
     <textarea  placeholder="Beschrijving" name="beschrijving" id="beschrijving" required></textarea>
     <hr>
-
     <button onclick="vraagVerlofAan()" type="submit" class="btn">Vraag aan</button>
   </div>
 
@@ -42,8 +41,5 @@
                     fetch('/Insert/Verlof?personeelid=' + personeelid + '&vanaf=' + vanaf + '&tot='+ tot + '&beschrijving='+ beschrijving)
                     .then(() => { window.location.href="/page/verlof/" })
                 }
-
-                
-            }
         </script>
   }
