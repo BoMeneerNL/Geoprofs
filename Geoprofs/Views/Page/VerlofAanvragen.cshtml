@@ -3,12 +3,11 @@
 }
 
 
-
-<form action="">
   <div class="form-container">
     <h1>Verlof aanvragen</h1>
     <p>Vul dit formulier in om verlof aan te vragen</p>
     <hr>
+    <p>Jouw ID:</p><p id="personeelid">@Program.currentuser.personeelid</p>
 
     <label for="vanaf"><b>Vanaf</b></label>
     <input type="date" placeholder="Vanaf datum" name="vanaf" id="vanaf" required>
@@ -20,15 +19,29 @@
     <textarea  placeholder="Beschrijving" name="beschrijving" id="beschrijving" required></textarea>
     <hr>
 
-    <button type="submit" class="btn">Vraag aan</button>
+    <button type="submit" class="btn" onclick="vraagVerlofAan()">Vraag aan</button>
   </div>
-</form>
-<script>
-    //Dit zorgt ervoor dat mensen niet de tot datum eerder kunnen maken dan de vanaf datum
-    document.getElementById("vanaf").addEventListener("change", function(){
-       console.log("test");
-        var firstdate = document.getElementById("vanaf").value;
-        document.getElementById("tot").value = "";
-        document.getElementById("tot").setAttribute("min",firstdate);
-    });
-</script>
+
+  @section Scripts{
+        <script>
+            //Dit zorgt ervoor dat mensen niet de tot datum eerder kunnen maken dan de vanaf datum
+            document.getElementById("vanaf").addEventListener("change", function(){
+                let firstdate = document.getElementById("vanaf").value;
+                document.getElementById("tot").value = "";
+                document.getElementById("tot").setAttribute("min",firstdate);
+            });
+
+            function vraagVerlofAan() {
+                let personeelid = document.getElementById("personeelid").innerText;
+                let vanaf = document.getElementById("vanaf").value;
+                let tot = document.getElementById("tot").value;
+                let beschrijving = document.getElementById("beschrijving").value;
+                console.log(personeelid, vanaf, tot, beschrijving);
+
+                fetch('/Insert/Verlof/' + personeelid + '/' + vanaf + '/'+ tot + '/'+ beschrijving)
+                .then(() => { }) //window.location.href="/page/verlof"
+
+                //INSERT INTO verlof(PersoneelID, Van, Tot, VerlofOmschrijving, status, VerlofTypeID) VALUES(9, '2022-06-17', '2022-06-17', 'Test1', 1, 1);
+            }
+        </script>
+  }

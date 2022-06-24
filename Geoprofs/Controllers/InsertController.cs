@@ -12,5 +12,15 @@ namespace Geoprofs.Controllers
 
             return View();
         }
+
+        public IActionResult Verlof(int personeelid, string vanaf, string tot, string beschrijving)
+        {
+            ViewData["personeelid"] = personeelid;
+            ViewData["vanaf"] = vanaf;
+            ViewData["tot"] = tot;
+            ViewData["beschrijving"] = beschrijving;
+
+            return View();
+        }
     }
 }
