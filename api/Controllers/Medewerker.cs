@@ -10,16 +10,16 @@ namespace api.Controllers
     {
         private readonly DBContext _context;
         public Medewerker(DBContext context) => _context = context;
+
         [HttpPut]
-        public async Task<ActionResult> UpdateStudentAsync(Medewerker Medewerker)
+        public async Task<ActionResult<Models.Medewerker>> UpdateStudentAsync(Models.Medewerker medewerker)
         {
             HttpContext.Response.Headers.Add("Access-Control-Allow-Methods", "GET, POST,PUT,DELETE,OPTIONS");
             HttpContext.Response.Headers.Add("Access-Control-Allow-Origin", "*");
             HttpContext.Response.Headers.Add("Access-Control-Allow-Headers", "Content-Type, Accept, Pragma, Cache-Control, Authtoken ");
-
-            _context.Add(Medewerker);
+            _context.Add(medewerker);
             await _context.SaveChangesAsync();
-            return Ok();
+            return medewerker;
         }
 
         [HttpDelete("{id}")]
