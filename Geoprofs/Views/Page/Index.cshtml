@@ -38,14 +38,14 @@
 @section Scripts{
     <script>
         function deleteuser(id) {
-            fetch("http://localhost:24360/Medewerker/" + id,{
+            fetch("http://localhost:5000/Medewerker/" + id,{
                 method: "DELETE"
             }).then(() => {
                 
             })
         }
              function GetUsers(){
-            fetch("http://localhost:24360/Medewerker").then((response) => response.json())
+            fetch("http://localhost:5000/Medewerker").then((response) => response.json())
                 .then((data) => {
                     for(let i=0;i < data.length;i++){
                 const element = document.createElement("td");
