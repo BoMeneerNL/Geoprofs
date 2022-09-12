@@ -47,7 +47,7 @@ namespace api.Controllers
             return medewerker;
         }
 
-        [HttpGet("delete/{id}")]
+        [HttpDelete("{id}")]
         public ActionResult DeleteMedewerker(int id)
         {
             HttpContext.Response.Headers.Add("Access-Control-Allow-Methods", "GET, POST,PUT,DELETE,OPTIONS");
