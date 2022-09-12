@@ -6,7 +6,7 @@
     List<Dictionary<string, object>> obj = Program.personeel;
     if(Program.currentuser.rankid == 10)
     {
-        <button><a href="/Page/Register">Nieuwe personeel</a></button>
+    <button><a href="/Page/Register">Nieuwe personeel</a></button>
     }
 }
 
@@ -19,7 +19,7 @@
             }
         </tr>
     </thead>
-    <tbody>
+    <tbody id="jeff">
         @for (int i = 0; i < obj.Count; i++)
         {
             <tr>
@@ -37,9 +37,24 @@
 </table>
 @section Scripts{
     <script>
-        function deleteuser(id){
-            fetch('/delete/Verlof/' + id)
-            .then(()=>window.location.reload())
+        function deleteuser(id) {
+            fetch("http://localhost:24360/Medewerker/" + id,{
+                method: "DELETE"
+            }).then(() => {
+                
+            })
         }
+             function GetUsers(){
+            fetch("http://localhost:24360/Medewerker").then((response) => response.json())
+                .then((data) => {
+                    for(let i=0;i < data.length;i++){
+                const element = document.createElement("td");
+                element.appendChild(document.createTextNode(data[i].naam));
+                document.getElementbyId('jeff').appendChild(element);
+                });
+        }
+             }
+        GetUsers();
+        
     </script>
 }
