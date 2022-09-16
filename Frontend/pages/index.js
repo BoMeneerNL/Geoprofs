@@ -7,6 +7,9 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import axios from 'axios';
+import { useRouter } from 'next/router';
+import Navbar from '../components/navbar';
+import { useState,useEffect } from 'react';
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
@@ -28,50 +31,48 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
   },
 }));
 
-function createData(name, calories, fat, carbs, protein) {
-  return { name, calories, fat, carbs, protein };
-}
-
-const rows = [
-  createData('Frozen yoghurt', 159, 6.0, 24, 4.0),
-  createData('Ice cream sandwich', 237, 9.0, 37, 4.3),
-  createData('Eclair', 262, 16.0, 24, 6.0),
-  createData('Cupcake', 305, 3.7, 67, 4.3),
-  createData('Gingerbread', 356, 16.0, 49, 3.9),
-];
-
 export default function Home() {
-  axios.get('http://localhost:24360/Medewerker').then(response=>{
-    console.log(response);
-  })
+  const [datafield,setDatafield] = useState([]);
+  useEffect(() => {
+    axios.get('http://localhost:11738/Medewerker').then(response=>{
+      console.log(response.data);
+      setDatafield(
+        response.data.map((row,key) => (
+            <StyledTableRow key={key}>
+              <StyledTableCell component="th" scope="row">
+              {row.isAdmin?"yes":"no"}
+              </StyledTableCell>
+              <StyledTableCell >{row.naam}</StyledTableCell>
+              <StyledTableCell >{row.wachtwoord}</StyledTableCell>
+              <StyledTableCell >{row.medewerkerID}</StyledTableCell>
+            </StyledTableRow>
+          ))
+      )
+      console.log(datafield);
+  });
+  },[])
 
+  function deleteMedewerker(id){
+    axios.delete('http://localhost:11738/Medewerker/'+id).then(()=>{
+
+    })
+  }
 
   return (
     <>
+    <Navbar/>
     <TableContainer component={Paper} sx={{maxWidth: 1000, margin: "100px auto"}} >
       <Table sx={{ minWidth: 350 }}>
         <TableHead>
           <TableRow>
-            
-            <StyledTableCell>ID</StyledTableCell>
-            <StyledTableCell>Rank</StyledTableCell>
             <StyledTableCell>Naam</StyledTableCell>
             <StyledTableCell>Wachtwoord</StyledTableCell>
+            <StyledTableCell>isAdmin</StyledTableCell>
             <StyledTableCell>Acties</StyledTableCell>
           </TableRow>
         </TableHead>
         <TableBody>
-          {rows.map((row) => (
-            <StyledTableRow key={row.name}>
-              <StyledTableCell component="th" scope="row">
-                {row.name}
-              </StyledTableCell>
-              <StyledTableCell >{row.calories}</StyledTableCell>
-              <StyledTableCell >{row.fat}</StyledTableCell>
-              <StyledTableCell >{row.carbs}</StyledTableCell>
-              <StyledTableCell >{row.protein}</StyledTableCell>
-            </StyledTableRow>
-          ))}
+          {datafield}
         </TableBody>
       </Table>
     </TableContainer>
