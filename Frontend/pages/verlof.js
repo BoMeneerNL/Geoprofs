@@ -1,16 +1,76 @@
-import Paper from "@mui/material/Paper";
-import { useRouter } from "next/router";
+import { styled } from '@mui/material/styles';
+import Table from '@mui/material/Table';
+import TableBody from '@mui/material/TableBody';
+import TableCell, { tableCellClasses } from '@mui/material/TableCell';
+import TableContainer from '@mui/material/TableContainer';
+import TableHead from '@mui/material/TableHead';
+import TableRow from '@mui/material/TableRow';
+import Paper from '@mui/material/Paper';
+import axios from 'axios';
 import Navbar from '../components/navbar';
-import { useEffect } from "react";
-import TextField from "@mui/material/TextField";
+import { useState,useEffect } from 'react';
+import { useRouter } from 'next/router';
+
+const StyledTableCell = styled(TableCell)(({ theme }) => ({
+  [`&.${tableCellClasses.head}`]: {
+    backgroundColor: theme.palette.common.black,
+    color: theme.palette.common.white,
+  },
+  [`&.${tableCellClasses.body}`]: {
+    fontSize: 14,
+  },
+}));
+
+const StyledTableRow = styled(TableRow)(({ theme }) => ({
+  '&:nth-of-type(odd)': {
+    backgroundColor: theme.palette.action.hover,
+  },
+  // hide last border
+  '&:last-child td, &:last-child th': {
+    border: 0,
+  },
+}));
 export default function Verlof() {
   const router = useRouter();
+  const [datafield,setDatafield] = useState([]);
+  useEffect(() => {
+    axios.get('http://localhost:11738/Medewerker').then(response=>{
+      console.log(response.data);
+      setDatafield(
+        response.data.map((row,key) => (
+            <StyledTableRow key={key}>
+              <StyledTableCell component="th" scope="row">
+              {row.naam}
+              </StyledTableCell>
+              <StyledTableCell >{row.naam}</StyledTableCell>
+              <StyledTableCell >{row.wachtwoord}</StyledTableCell>
+              <StyledTableCell >{
+              row.isAdmin?"yes":"no"
+              }</StyledTableCell>
+            </StyledTableRow>
+          ))
+      )
+      console.log(datafield);
+  });
+  },[datafield])
     return(
-        <>
-        <Navbar/>
-        <TextField label={""} />
-        <TextField label={""} />
-        <TextField label={""} />
+      <>
+      <Navbar/>
+      <TableContainer component={Paper} sx={{maxWidth: 1000, margin: "100px auto"}} >
+        <Table sx={{ minWidth: 350 }}>
+          <TableHead>
+            <TableRow>
+              <StyledTableCell>Naam</StyledTableCell>
+              <StyledTableCell>Verlof van</StyledTableCell>
+              <StyledTableCell>Verlof tot</StyledTableCell>
+              <StyledTableCell>Acties</StyledTableCell>
+            </TableRow>
+          </TableHead>
+          <TableBody>
+            {datafield}
+          </TableBody>
+        </Table>
+      </TableContainer>
       </>
     );
   }

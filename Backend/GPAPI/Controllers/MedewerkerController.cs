@@ -16,14 +16,36 @@ namespace GPAPI.Controllers
         private readonly DBContext _context;
 
         public MedewerkerController(DBContext context) => _context = context;
+        [HttpOptions]
+        [HttpOptions("{id}")]
+        public OkResult Options()
+        {
+            HttpContext.Response.Headers.Add("Access-Control-Allow-Methods", "GET, POST,PUT,DELETE,OPTIONS");
+            HttpContext.Response.Headers.Add("Access-Control-Allow-Origin", "*");
+            HttpContext.Response.Headers.Add("Access-Control-Allow-Headers", "Content-Type, Accept, Pragma, Cache-Control, Authtoken ");
+            return Ok();
+        }
         [HttpGet]
-        public IEnumerable<Models.Medewerker> Get()
+        public IEnumerable<Medewerker> Get()
         {
             HttpContext.Response.Headers.Add("Access-Control-Allow-Methods", "GET, POST,PUT,DELETE,OPTIONS");
             HttpContext.Response.Headers.Add("Access-Control-Allow-Origin", "*");
             HttpContext.Response.Headers.Add("Access-Control-Allow-Headers", "Content-Type, Accept, Pragma, Cache-Control, Authtoken ");
             return _context.Medewerkers.ToList();
 
+        }
+        [HttpGet("{id}")]
+        public ActionResult<Medewerker> GetMedewerker(int id)
+        {
+            HttpContext.Response.Headers.Add("Access-Control-Allow-Methods", "GET, POST,PUT,DELETE,OPTIONS");
+            HttpContext.Response.Headers.Add("Access-Control-Allow-Origin", "*");
+            HttpContext.Response.Headers.Add("Access-Control-Allow-Headers", "Content-Type, Accept, Pragma, Cache-Control, Authtoken ");
+            var medewerker = _context.Medewerkers.Find(id);
+            if (medewerker == null)
+            {
+                return NotFound();
+            }
+            return medewerker;
         }
         [HttpDelete("{id}")]
         public void Delete(int id)

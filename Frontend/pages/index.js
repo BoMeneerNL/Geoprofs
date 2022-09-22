@@ -6,10 +6,13 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
+import EditIcon from '@mui/icons-material/Edit';
+import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 import axios from 'axios';
-import { useRouter } from 'next/router';
 import Navbar from '../components/navbar';
+import { Button, Typography } from '@mui/material';
 import { useState,useEffect } from 'react';
+import { DeleteForever } from '@mui/icons-material';
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
@@ -40,34 +43,39 @@ export default function Home() {
         response.data.map((row,key) => (
             <StyledTableRow key={key}>
               <StyledTableCell component="th" scope="row">
-              {row.isAdmin?"yes":"no"}
+              {row.naam}
               </StyledTableCell>
-              <StyledTableCell >{row.naam}</StyledTableCell>
               <StyledTableCell >{row.wachtwoord}</StyledTableCell>
-              <StyledTableCell >{row.medewerkerID}</StyledTableCell>
+              <StyledTableCell >
+                {
+                  row.isAdmin?(<><EditIcon sx={{pointer: 'cursor'}}/><DeleteForeverIcon sx={{pointer: 'cursor'}} onClick={()=>{
+                    deleteMedewerker(row.medewerkerID);
+                  }}/></>):(<Typography>Je hebt geen rechten om iets aan te passen</Typography>)
+                }
+
+              </StyledTableCell>
             </StyledTableRow>
           ))
       )
-      console.log(datafield);
   });
   },[])
 
   function deleteMedewerker(id){
     axios.delete('http://localhost:11738/Medewerker/'+id).then(()=>{
-
-    })
-  }
+    console.log("deleted: "+id);
+  }).catch((error)=>{
+    console.log(error);
+  })}
 
   return (
     <>
     <Navbar/>
     <TableContainer component={Paper} sx={{maxWidth: 1000, margin: "100px auto"}} >
-      <Table sx={{ minWidth: 350 }}>
+      <Table>
         <TableHead>
           <TableRow>
             <StyledTableCell>Naam</StyledTableCell>
             <StyledTableCell>Wachtwoord</StyledTableCell>
-            <StyledTableCell>isAdmin</StyledTableCell>
             <StyledTableCell>Acties</StyledTableCell>
           </TableRow>
         </TableHead>
