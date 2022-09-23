@@ -12,12 +12,13 @@ import { LocalizationProvider } from "@mui/x-date-pickers";
 import Select from "@mui/material/Select";
 import MenuItem from "@mui/material/MenuItem";
 import { useRouter } from "next/router";
+import axios from "axios";
 
 export default function VerlofAanvraag() {
   const router = useRouter();
   const [van, setVan] = useState(null);
   const [tot, setTot] = useState(null);
-  let [curUser, setCurUser] = useState(null);
+  let [curUser, setCurUser] = useState("Select");
 
   const [users, setUsers] = useState([
     "Mahek Massey",
@@ -25,6 +26,18 @@ export default function VerlofAanvraag() {
     "Penelope Harwood",
     "Asha Ochoa",
   ]);
+
+  function vraagVerlofAan() {
+    axios.put("http://localhost:11738/Verlof", {
+      medewerkerId: 1,
+      van: 10,
+      tot: 20,
+    });
+  }
+
+  useEffect(() => {
+    console.log(van);
+  }, [van]);
 
   return (
     <>
@@ -89,7 +102,15 @@ export default function VerlofAanvraag() {
                 renderInput={(params) => <TextField {...params} />}
               />
             </LocalizationProvider>
-            <Button type="submit" fullWidth variant="contained">
+            <Button
+              type="submit"
+              fullWidth
+              variant="contained"
+              onClick={(e) => {
+                e.preventDefault();
+                vraagVerlofAan();
+              }}
+            >
               Vraag verlof aan
             </Button>
           </Box>
