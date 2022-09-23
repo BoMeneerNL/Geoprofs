@@ -17,6 +17,7 @@ export default function VerlofAanvraag() {
   const router = useRouter();
   const [van, setVan] = useState(null);
   const [tot, setTot] = useState(null);
+  let [curUser, setCurUser] = useState(null);
 
   const [users, setUsers] = useState([
     "Mahek Massey",
@@ -59,10 +60,10 @@ export default function VerlofAanvraag() {
               <Select
                 labelId="select-label"
                 id="select"
-                value={users}
+                value={curUser}
                 label="Persoon"
                 onChange={(e) => {
-                  setUsers(e.target.value);
+                  setCurUser(e.target.value);
                 }}
               >
                 {users.map((user, key) => (
