@@ -1,15 +1,15 @@
-import { styled } from '@mui/material/styles';
-import Table from '@mui/material/Table';
-import TableBody from '@mui/material/TableBody';
-import TableCell, { tableCellClasses } from '@mui/material/TableCell';
-import TableContainer from '@mui/material/TableContainer';
-import TableHead from '@mui/material/TableHead';
-import TableRow from '@mui/material/TableRow';
-import Paper from '@mui/material/Paper';
-import axios from 'axios';
-import Navbar from '../components/navbar';
-import { useState,useEffect } from 'react';
-import { useRouter } from 'next/router';
+import { styled } from "@mui/material/styles";
+import Table from "@mui/material/Table";
+import TableBody from "@mui/material/TableBody";
+import TableCell, { tableCellClasses } from "@mui/material/TableCell";
+import TableContainer from "@mui/material/TableContainer";
+import TableHead from "@mui/material/TableHead";
+import TableRow from "@mui/material/TableRow";
+import Paper from "@mui/material/Paper";
+import axios from "axios";
+import Navbar from "../components/navbar";
+import { useState, useEffect } from "react";
+import { useRouter } from "next/router";
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
@@ -22,41 +22,47 @@ const StyledTableCell = styled(TableCell)(({ theme }) => ({
 }));
 
 const StyledTableRow = styled(TableRow)(({ theme }) => ({
-  '&:nth-of-type(odd)': {
+  "&:nth-of-type(odd)": {
     backgroundColor: theme.palette.action.hover,
   },
   // hide last border
-  '&:last-child td, &:last-child th': {
+  "&:last-child td, &:last-child th": {
     border: 0,
   },
 }));
 export default function Verlof() {
   const router = useRouter();
-  const [datafield,setDatafield] = useState([]);
+  const [datafield, setDatafield] = useState([]);
   useEffect(() => {
-    axios.get('http://localhost:11738/Medewerker').then(response=>{
+    axios.get("http://localhost:11738/Verlof").then((response) => {
       console.log(response.data);
       setDatafield(
-        response.data.map((row,key) => (
+        response.data.map((row, key) => {
+          const van = new Date(row.van * 1000).toDateString();
+          const tot = new Date(row.van * 1000).toDateString();
+
+          return (
             <StyledTableRow key={key}>
               <StyledTableCell component="th" scope="row">
-              {row.naam}
+                {row.naam}
               </StyledTableCell>
-              <StyledTableCell >{row.naam}</StyledTableCell>
-              <StyledTableCell >{row.wachtwoord}</StyledTableCell>
-              <StyledTableCell >{
-              row.isAdmin?"yes":"no"
-              }</StyledTableCell>
+              <StyledTableCell>{van}</StyledTableCell>
+              <StyledTableCell>{tot}</StyledTableCell>
+              <StyledTableCell>{row.isAdmin ? "Yes" : "No"}</StyledTableCell>
             </StyledTableRow>
-          ))
-      )
+          );
+        })
+      );
       console.log(datafield);
-  });
-  },[datafield])
-    return(
-      <>
-      <Navbar/>
-      <TableContainer component={Paper} sx={{maxWidth: 1000, margin: "100px auto"}} >
+    });
+  }, []);
+  return (
+    <>
+      <Navbar />
+      <TableContainer
+        component={Paper}
+        sx={{ maxWidth: 1000, margin: "100px auto" }}
+      >
         <Table sx={{ minWidth: 350 }}>
           <TableHead>
             <TableRow>
@@ -66,11 +72,9 @@ export default function Verlof() {
               <StyledTableCell>Acties</StyledTableCell>
             </TableRow>
           </TableHead>
-          <TableBody>
-            {datafield}
-          </TableBody>
+          <TableBody>{datafield}</TableBody>
         </Table>
       </TableContainer>
-      </>
-    );
-  }
+    </>
+  );
+}
