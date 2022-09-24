@@ -36,11 +36,13 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
 
 export default function Home() {
   const [datafield,setDatafield] = useState([]);
+  let datacollector = [];
   useEffect(() => {
     axios.get('http://localhost:11738/Medewerker').then(response=>{
       console.log(response.data);
+      datacollector = response.data;
       setDatafield(
-        response.data.map((row,key) => (
+        datacollector.map((row,key) => (
             <StyledTableRow key={key}>
               <StyledTableCell component="th" scope="row">
               {row.naam}
@@ -49,7 +51,7 @@ export default function Home() {
               <StyledTableCell >
                 {
                   row.isAdmin?(<><EditIcon sx={{pointer: 'cursor'}}/><DeleteForeverIcon sx={{pointer: 'cursor'}} onClick={()=>{
-                    deleteMedewerker(row.medewerkerID);
+                    deleteMedewerker(row.medewerkerID,key);
                   }}/></>):(<Typography>Je hebt geen rechten om iets aan te passen</Typography>)
                 }
 
@@ -60,9 +62,28 @@ export default function Home() {
   });
   },[])
 
-  function deleteMedewerker(id){
+  function deleteMedewerker(id,key){
     axios.delete('http://localhost:11738/Medewerker/'+id).then(()=>{
     console.log("deleted: "+id);
+    datacollector.splice(key,1);
+      setDatafield(
+        datacollector.map((row,key) => (
+          <StyledTableRow key={key}>
+            <StyledTableCell component="th" scope="row">
+              {row.naam}
+            </StyledTableCell>
+            <StyledTableCell >{row.wachtwoord}</StyledTableCell>
+            <StyledTableCell >
+              {
+                row.isAdmin?(<><EditIcon sx={{pointer: 'cursor'}}/><DeleteForeverIcon sx={{pointer: 'cursor'}} onClick={()=>{
+                  deleteMedewerker(row.medewerkerID,key);
+                }}/></>):(<Typography>Je hebt geen rechten om iets aan te passen</Typography>)
+              }
+
+            </StyledTableCell>
+          </StyledTableRow>
+        ))
+      )
   }).catch((error)=>{
     console.log(error);
   })}
