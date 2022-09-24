@@ -19,7 +19,7 @@ function getAllMedewerkersNames(){
   axios.get('http://localhost:11738/Medewerker').then(response=>{
   datacollector = response.data;
   datacollector.map((row,key) => {
-    datafield.push(<MenuItem value={row.medewerkerID}>{row.naam}</MenuItem>);
+    datafield.push(<MenuItem key={key} value={row.medewerkerID}>{row.naam}</MenuItem>);
   })
   })
   return datafield;
@@ -29,13 +29,13 @@ export default function VerlofAanvraag() {
   const [vanTimestamp, setVanTimestamp] = useState(0);
   const [tot, setTot] = useState(null);
   const [totTimestamp, setTotTimestamp] = useState(0);
-  let [curUser, setCurUser] = useState("");
+  let [curUser, setCurUser] = useState(0);
 
   const [users, setUsers] = useState([]);
 
   function vraagVerlofAan() {
     axios.put("http://localhost:11738/Verlof", {
-      medewerkerId: 1,
+      medewerkerId: curUser,
       van: vanTimestamp,
       tot: totTimestamp,
     });
@@ -46,9 +46,11 @@ export default function VerlofAanvraag() {
  },[]);
  
   useEffect(() => {
-    console.log(moment(van).unix());
+    setVanTimestamp(moment(van).unix());
   }, [van]);
-
+  useEffect(() => {
+    setTotTimestamp(moment(tot).unix());
+  }, [tot]);
   return (
     <>
       <Navbar />
@@ -92,6 +94,7 @@ export default function VerlofAanvraag() {
                 {users}
               </Select>
               <DatePicker
+                disablePast
                 label="Van"
                 value={van}
                 onChange={(value) => {

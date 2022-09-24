@@ -38,8 +38,8 @@ export default function Verlof() {
       console.log(response.data);
       setDatafield(
         response.data.map((row, key) => {
-          const van = new Date(row.van * 1000).toDateString();
-          const tot = new Date(row.van * 1000).toDateString();
+          const van = new Date(row.van * 1000).toLocaleDateString();
+          const tot = new Date(row.tot * 1000).toLocaleDateString();
 
           return (
             <StyledTableRow key={key}>

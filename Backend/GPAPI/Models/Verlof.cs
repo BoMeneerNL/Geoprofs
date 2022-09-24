@@ -13,5 +13,7 @@ namespace GPAPI.Models
         public int MedewerkerId { get; set; }
         public uint Van { get; set; }
         public uint Tot { get; set; }
+        public byte Status { get; set; }
+        public string Reden { get; set; }
     }
 }
