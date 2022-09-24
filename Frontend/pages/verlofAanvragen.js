@@ -11,36 +11,42 @@ import { AdapterMoment } from "@mui/x-date-pickers/AdapterMoment";
 import { LocalizationProvider } from "@mui/x-date-pickers";
 import Select from "@mui/material/Select";
 import MenuItem from "@mui/material/MenuItem";
-import { useRouter } from "next/router";
 import axios from "axios";
-
+import moment from "moment";
+function getAllMedewerkersNames(){
+  let datacollector = [];
+  let datafield = [];
+  axios.get('http://localhost:11738/Medewerker').then(response=>{
+  datacollector = response.data;
+  datacollector.map((row,key) => {
+    datafield.push(<MenuItem value={row.medewerkerID}>{row.naam}</MenuItem>);
+  })
+  })
+  return datafield;
+}
 export default function VerlofAanvraag() {
-  const router = useRouter();
   const [van, setVan] = useState(null);
+  const [vanTimestamp, setVanTimestamp] = useState(0);
   const [tot, setTot] = useState(null);
-  let [curUser, setCurUser] = useState("Select");
+  const [totTimestamp, setTotTimestamp] = useState(0);
+  let [curUser, setCurUser] = useState("");
 
-  const [users, setUsers] = useState([
-    "Mahek Massey",
-    "Zakary Sierra",
-    "Penelope Harwood",
-    "Asha Ochoa",
-  ]);
+  const [users, setUsers] = useState([]);
 
   function vraagVerlofAan() {
     axios.put("http://localhost:11738/Verlof", {
       medewerkerId: 1,
-      van: 10,
-      tot: 20,
+      van: vanTimestamp,
+      tot: totTimestamp,
     });
   }
   
  useEffect(() => {
-
+   setUsers(getAllMedewerkersNames());
  },[]);
  
   useEffect(() => {
-    console.log(van);
+    console.log(moment(van).unix());
   }, [van]);
 
   return (
@@ -83,11 +89,7 @@ export default function VerlofAanvraag() {
                   setCurUser(e.target.value);
                 }}
               >
-                {users.map((user, key) => (
-                  <MenuItem index={key} value={user}>
-                    {user}
-                  </MenuItem>
-                ))}
+                {users}
               </Select>
               <DatePicker
                 label="Van"
