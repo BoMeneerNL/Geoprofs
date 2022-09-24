@@ -34,7 +34,9 @@ export default function VerlofAanvraag() {
       tot: 20,
     });
   }
+ useEffect(() => {
 
+ },[]);
   useEffect(() => {
     console.log(van);
   }, [van]);
