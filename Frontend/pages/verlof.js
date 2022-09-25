@@ -1,17 +1,17 @@
-import { styled } from "@mui/material/styles";
+import {styled} from "@mui/material/styles";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
-import TableCell, { tableCellClasses } from "@mui/material/TableCell";
+import TableCell, {tableCellClasses} from "@mui/material/TableCell";
 import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import axios from "axios";
 import Navbar from "../components/navbar";
-import { useState, useEffect } from "react";
-import { useRouter } from "next/router";
+import {useEffect, useState} from "react";
+import {useRouter} from "next/router";
 
-const StyledTableCell = styled(TableCell)(({ theme }) => ({
+const StyledTableCell = styled(TableCell)(({theme}) => ({
   [`&.${tableCellClasses.head}`]: {
     backgroundColor: theme.palette.common.black,
     color: theme.palette.common.white,
@@ -21,7 +21,7 @@ const StyledTableCell = styled(TableCell)(({ theme }) => ({
   },
 }));
 
-const StyledTableRow = styled(TableRow)(({ theme }) => ({
+const StyledTableRow = styled(TableRow)(({theme}) => ({
   "&:nth-of-type(odd)": {
     backgroundColor: theme.palette.action.hover,
   },
@@ -48,27 +48,28 @@ export default function Verlof() {
               </StyledTableCell>
               <StyledTableCell>{van}</StyledTableCell>
               <StyledTableCell>{tot}</StyledTableCell>
+              <StyledTableCell>{row.status === 1 ? "nog niet beoordeeld" : (row.status === 2 ? "Goedgekeurd" : (row.status === 3 ? "Afgewezen" : "An error occured"))}</StyledTableCell>
               <StyledTableCell>{row.isAdmin ? "Yes" : "No"}</StyledTableCell>
             </StyledTableRow>
           );
         })
       );
-      console.log(datafield);
     });
   }, []);
   return (
     <>
-      <Navbar />
+      <Navbar/>
       <TableContainer
         component={Paper}
-        sx={{ maxWidth: 1000, margin: "100px auto" }}
+        sx={{maxWidth: "75%", margin: "100px auto"}}
       >
-        <Table sx={{ minWidth: 350 }}>
+        <Table>
           <TableHead>
             <TableRow>
               <StyledTableCell>Naam</StyledTableCell>
               <StyledTableCell>Verlof van</StyledTableCell>
               <StyledTableCell>Verlof tot</StyledTableCell>
+              <StyledTableCell>Status</StyledTableCell>
               <StyledTableCell>Acties</StyledTableCell>
             </TableRow>
           </TableHead>

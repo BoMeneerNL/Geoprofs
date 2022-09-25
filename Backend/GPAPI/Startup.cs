@@ -29,8 +29,7 @@ namespace api
                                   {
                                       policy.SetIsOriginAllowed(o => true)
                                              .AllowAnyHeader()
-                                             .AllowAnyMethod()
-                                             .AllowCredentials();
+                                             .AllowAnyMethod();
                                   });
             });
 

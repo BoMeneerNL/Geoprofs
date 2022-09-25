@@ -1,7 +1,7 @@
-import { styled } from '@mui/material/styles';
+import {styled} from '@mui/material/styles';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
-import TableCell, { tableCellClasses } from '@mui/material/TableCell';
+import TableCell, {tableCellClasses} from '@mui/material/TableCell';
 import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
@@ -10,11 +10,10 @@ import EditIcon from '@mui/icons-material/Edit';
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 import axios from 'axios';
 import Navbar from '../components/navbar';
-import { Button, Typography } from '@mui/material';
-import { useState,useEffect } from 'react';
-import { DeleteForever } from '@mui/icons-material';
+import {Typography} from '@mui/material';
+import {useEffect, useState} from 'react';
 
-const StyledTableCell = styled(TableCell)(({ theme }) => ({
+const StyledTableCell = styled(TableCell)(({theme}) => ({
   [`&.${tableCellClasses.head}`]: {
     backgroundColor: theme.palette.common.black,
     color: theme.palette.common.white,
@@ -24,7 +23,7 @@ const StyledTableCell = styled(TableCell)(({ theme }) => ({
   },
 }));
 
-const StyledTableRow = styled(TableRow)(({ theme }) => ({
+const StyledTableRow = styled(TableRow)(({theme}) => ({
   '&:nth-of-type(odd)': {
     backgroundColor: theme.palette.action.hover,
   },
@@ -35,76 +34,81 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
 }));
 
 export default function Home() {
-  const [datafield,setDatafield] = useState([]);
+  const [datafield, setDatafield] = useState([]);
   let datacollector = [];
   useEffect(() => {
-    axios.get('http://localhost:11738/Medewerker').then(response=>{
+    axios.get('http://localhost:11738/Medewerker').then(response => {
       console.log(response.data);
       datacollector = response.data;
       setDatafield(
-        datacollector.map((row,key) => (
-            <StyledTableRow key={key}>
-              <StyledTableCell component="th" scope="row">
-              {row.naam}
-              </StyledTableCell>
-              <StyledTableCell >{row.wachtwoord}</StyledTableCell>
-              <StyledTableCell >
-                {
-                  row.isAdmin?(<><EditIcon sx={{pointer: 'cursor'}}/><DeleteForeverIcon sx={{pointer: 'cursor'}} onClick={()=>{
-                    deleteMedewerker(row.medewerkerID,key);
-                  }}/></>):(<Typography>Je hebt geen rechten om iets aan te passen</Typography>)
-                }
-
-              </StyledTableCell>
-            </StyledTableRow>
-          ))
-      )
-  });
-  },[])
-
-  function deleteMedewerker(id,key){
-    axios.delete('http://localhost:11738/Medewerker/'+id).then(()=>{
-    console.log("deleted: "+id);
-    datacollector.splice(key,1);
-      setDatafield(
-        datacollector.map((row,key) => (
+        datacollector.map((row, key) => (
           <StyledTableRow key={key}>
             <StyledTableCell component="th" scope="row">
               {row.naam}
             </StyledTableCell>
-            <StyledTableCell >{row.wachtwoord}</StyledTableCell>
-            <StyledTableCell >
+            <StyledTableCell>{row.wachtwoord}</StyledTableCell>
+            <StyledTableCell>
               {
-                row.isAdmin?(<><EditIcon sx={{pointer: 'cursor'}}/><DeleteForeverIcon sx={{pointer: 'cursor'}} onClick={()=>{
-                  deleteMedewerker(row.medewerkerID,key);
-                }}/></>):(<Typography>Je hebt geen rechten om iets aan te passen</Typography>)
+                row.isAdmin ? (<><EditIcon sx={{pointer: 'cursor'}}/><DeleteForeverIcon sx={{pointer: 'cursor'}}
+                                                                                        onClick={() => {
+                                                                                          deleteMedewerker(row.medewerkerID, key);
+                                                                                        }}/></>) : (
+                  <Typography>Je hebt geen rechten om iets aan te passen</Typography>)
               }
 
             </StyledTableCell>
           </StyledTableRow>
         ))
       )
-  }).catch((error)=>{
-    console.log(error);
-  })}
+    });
+  }, [])
+
+  function deleteMedewerker(id, key) {
+    axios.delete('http://localhost:11738/Medewerker/' + id).then(() => {
+      console.log("deleted: " + id);
+      datacollector.splice(key, 1);
+      setDatafield(
+        datacollector.map((row, key) => (
+          <StyledTableRow key={key}>
+            <StyledTableCell component="th" scope="row">
+              {row.naam}
+            </StyledTableCell>
+            <StyledTableCell>{row.wachtwoord}</StyledTableCell>
+            <StyledTableCell>
+              {
+                row.isAdmin ? (<><EditIcon sx={{pointer: 'cursor'}}/><DeleteForeverIcon sx={{pointer: 'cursor'}}
+                                                                                        onClick={() => {
+                                                                                          deleteMedewerker(row.medewerkerID, key);
+                                                                                        }}/></>) : (
+                  <Typography>Je hebt geen rechten om iets aan te passen</Typography>)
+              }
+
+            </StyledTableCell>
+          </StyledTableRow>
+        ))
+      )
+    }).catch((error) => {
+      console.log(error);
+    })
+  }
 
   return (
     <>
-    <Navbar/>
-    <TableContainer component={Paper} sx={{maxWidth: 1000, margin: "100px auto"}} >
-      <Table>
-        <TableHead>
-          <TableRow>
-            <StyledTableCell>Naam</StyledTableCell>
-            <StyledTableCell>Wachtwoord</StyledTableCell>
-            <StyledTableCell>Acties</StyledTableCell>
-          </TableRow>
-        </TableHead>
-        <TableBody>
-          {datafield}
-        </TableBody>
-      </Table>
-    </TableContainer>
+      <Navbar/>
+      <TableContainer component={Paper} sx={{maxWidth: "75%", margin: "100px auto"}}>
+        <Table>
+          <TableHead>
+            <TableRow>
+              <StyledTableCell>Naam</StyledTableCell>
+              <StyledTableCell>Wachtwoord</StyledTableCell>
+              <StyledTableCell>Acties</StyledTableCell>
+            </TableRow>
+          </TableHead>
+          <TableBody>
+            {datafield}
+          </TableBody>
+        </Table>
+      </TableContainer>
     </>
   )
 }

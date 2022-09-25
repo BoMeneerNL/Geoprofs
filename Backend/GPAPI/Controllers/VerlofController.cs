@@ -24,7 +24,7 @@ namespace GPAPI.Controllers
 
         [HttpGet]
         public ActionResult<List<VerlofSender>> GetAllVerlof() {
-            var res = _context.Verlof.Include(x => x.Medewerker).Select(x => new { Naam = x.Medewerker.Naam, Van = x.Van, Tot = x.Tot }).ToList();
+            var res = _context.Verlof.Include(x => x.Medewerker).Select(x => new { x.Medewerker.Naam, x.Van, x.Tot,x.Status }).ToList();
             return Ok(res);
         }
     }

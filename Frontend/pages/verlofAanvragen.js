@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import {useEffect, useState} from "react";
 import Navbar from "../components/navbar";
 import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
@@ -6,24 +6,26 @@ import Box from "@mui/material/Box";
 import InputLabel from "@mui/material/InputLabel";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
-import { DatePicker } from "@mui/x-date-pickers/DatePicker";
-import { AdapterMoment } from "@mui/x-date-pickers/AdapterMoment";
-import { LocalizationProvider } from "@mui/x-date-pickers";
+import {DatePicker} from "@mui/x-date-pickers/DatePicker";
+import {AdapterMoment} from "@mui/x-date-pickers/AdapterMoment";
+import {LocalizationProvider} from "@mui/x-date-pickers";
 import Select from "@mui/material/Select";
 import MenuItem from "@mui/material/MenuItem";
 import axios from "axios";
 import moment from "moment";
-function getAllMedewerkersNames(){
+
+function getAllMedewerkersNames() {
   let datacollector = [];
   let datafield = [];
-  axios.get('http://localhost:11738/Medewerker').then(response=>{
-  datacollector = response.data;
-  datacollector.map((row,key) => {
-    datafield.push(<MenuItem key={key} value={row.medewerkerID}>{row.naam}</MenuItem>);
-  })
+  axios.get('http://localhost:11738/Medewerker').then(response => {
+    datacollector = response.data;
+    datacollector.map((row, key) => {
+      datafield.push(<MenuItem key={key} value={row.medewerkerID}>{row.naam}</MenuItem>);
+    })
   })
   return datafield;
 }
+
 export default function VerlofAanvraag() {
   const [van, setVan] = useState(null);
   const [vanTimestamp, setVanTimestamp] = useState(0);
@@ -38,13 +40,15 @@ export default function VerlofAanvraag() {
       medewerkerId: curUser,
       van: vanTimestamp,
       tot: totTimestamp,
+      status: 1,
+      reden: null
     });
   }
-  
- useEffect(() => {
-   setUsers(getAllMedewerkersNames());
- },[]);
- 
+
+  useEffect(() => {
+    setUsers(getAllMedewerkersNames());
+  }, []);
+
   useEffect(() => {
     setVanTimestamp(moment(van).unix());
   }, [van]);
@@ -53,7 +57,7 @@ export default function VerlofAanvraag() {
   }, [tot]);
   return (
     <>
-      <Navbar />
+      <Navbar/>
       <Container component="main" maxWidth="xs">
         <Box
           sx={{
@@ -81,12 +85,11 @@ export default function VerlofAanvraag() {
               dateAdapter={AdapterMoment}
               adapterLocale={"de"}
             >
-              <InputLabel id="select-label">Persoon</InputLabel>
+              <InputLabel id="select-label">Medewerker</InputLabel>
               <Select
                 labelId="select-label"
                 id="select"
                 value={curUser}
-                label="Persoon"
                 onChange={(e) => {
                   setCurUser(e.target.value);
                 }}
