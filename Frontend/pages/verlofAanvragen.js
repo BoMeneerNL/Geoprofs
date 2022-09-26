@@ -42,6 +42,7 @@ export default function VerlofAanvraag() {
   const [users, setUsers] = useState([]);
 
   function vraagVerlofAan() {
+<<<<<<< Updated upstream
     axios
       .put("http://localhost:11738/Verlof", {
         medewerkerId: curUser,
@@ -53,6 +54,15 @@ export default function VerlofAanvraag() {
       .then(() => {
         router.push("/verlof");
       });
+=======
+    axios.put("http://localhost:11738/Verlof", {
+      medewerkerId: curUser,
+      van: vanTimestamp,
+      tot: totTimestamp,
+      status: 1,
+      reden: null,
+    });
+>>>>>>> Stashed changes
   }
 
   useEffect(() => {

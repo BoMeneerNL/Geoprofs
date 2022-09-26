@@ -9,7 +9,7 @@ namespace GPAPI.Controllers
 {
     [Route("[controller]")]
     [ApiController]
-    public class VerlofController:ControllerBase
+    public class VerlofController : ControllerBase
     {
         private readonly DBContext _context;
 
@@ -23,9 +23,39 @@ namespace GPAPI.Controllers
         }
 
         [HttpGet]
-        public ActionResult<List<VerlofSender>> GetAllVerlof() {
-            var res = _context.Verlof.Include(x => x.Medewerker).Select(x => new { x.Medewerker.Naam, x.Van, x.Tot,x.Status }).ToList();
+        public ActionResult GetAllVerlof() {
+            var res = _context.Verlof.Include(x => x.Medewerker).Select(x => new { x.Medewerker.Naam, x.Van, x.Tot, x.Status }).ToList();
             return Ok(res);
+        }
+        [HttpPost("/changestatus/{verlofid}/{newstatus}")]
+        public ActionResult ChangeVerlofStatus(int verlofid,byte newstatus)
+        {
+            Verlof verlof = _context.Verlof.Find(verlofid);
+            if (verlof == null) 
+                return NotFound();
+            if(newstatus is not 2 and not 3)
+            {
+                return BadRequest();
+            }
+            verlof.Status = newstatus switch
+            {
+                2 => 2,
+                3 => 3
+            };
+            _context.Verlof.Update(verlof);
+            _context.SaveChanges();
+            return Ok();
+        }
+        [HttpPost("/addreason/{verlofid}/{reason}")]
+        public ActionResult AddReason(int verlofid, string reason)
+        {
+            Verlof verlof = _context.Verlof.Find(verlofid);
+            if (verlof == null)
+                return NotFound();
+            verlof.Reden = reason;
+            _context.Verlof.Update(verlof);
+            _context.SaveChanges();
+            return Ok();
         }
     }
 }
