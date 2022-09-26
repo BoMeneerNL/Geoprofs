@@ -1,4 +1,4 @@
-import {useEffect, useState} from "react";
+import { useEffect, useState } from "react";
 import Navbar from "../components/navbar";
 import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
@@ -6,27 +6,33 @@ import Box from "@mui/material/Box";
 import InputLabel from "@mui/material/InputLabel";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
-import {DatePicker} from "@mui/x-date-pickers/DatePicker";
-import {AdapterMoment} from "@mui/x-date-pickers/AdapterMoment";
-import {LocalizationProvider} from "@mui/x-date-pickers";
+import { DatePicker } from "@mui/x-date-pickers/DatePicker";
+import { AdapterMoment } from "@mui/x-date-pickers/AdapterMoment";
+import { LocalizationProvider } from "@mui/x-date-pickers";
 import Select from "@mui/material/Select";
 import MenuItem from "@mui/material/MenuItem";
 import axios from "axios";
 import moment from "moment";
+import { useRouter } from "next/router";
 
 function getAllMedewerkersNames() {
   let datacollector = [];
   let datafield = [];
-  axios.get('http://localhost:11738/Medewerker').then(response => {
+  axios.get("http://localhost:11738/Medewerker").then((response) => {
     datacollector = response.data;
     datacollector.map((row, key) => {
-      datafield.push(<MenuItem key={key} value={row.medewerkerID}>{row.naam}</MenuItem>);
-    })
-  })
+      datafield.push(
+        <MenuItem key={key} value={row.medewerkerID}>
+          {row.naam}
+        </MenuItem>
+      );
+    });
+  });
   return datafield;
 }
 
 export default function VerlofAanvraag() {
+  const router = useRouter();
   const [van, setVan] = useState(null);
   const [vanTimestamp, setVanTimestamp] = useState(0);
   const [tot, setTot] = useState(null);
@@ -36,13 +42,17 @@ export default function VerlofAanvraag() {
   const [users, setUsers] = useState([]);
 
   function vraagVerlofAan() {
-    axios.put("http://localhost:11738/Verlof", {
-      medewerkerId: curUser,
-      van: vanTimestamp,
-      tot: totTimestamp,
-      status: 1,
-      reden: null
-    });
+    axios
+      .put("http://localhost:11738/Verlof", {
+        medewerkerId: curUser,
+        van: vanTimestamp,
+        tot: totTimestamp,
+        status: 1,
+        reden: null,
+      })
+      .then(() => {
+        router.push("/verlof");
+      });
   }
 
   useEffect(() => {
@@ -57,7 +67,7 @@ export default function VerlofAanvraag() {
   }, [tot]);
   return (
     <>
-      <Navbar/>
+      <Navbar />
       <Container component="main" maxWidth="xs">
         <Box
           sx={{
