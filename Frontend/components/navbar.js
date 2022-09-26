@@ -22,6 +22,7 @@ export default function Navbar() {
       <a onClick={() => goto("/verlof")}>Verlofoverzicht</a>
       <a onClick={() => goto("/verlofAanvragen")}>Verlof aanvragen</a>
       <a onClick={() => goto("/login")}>Inloggen</a>
+      <a onClick={() => goto("/registratie")}>Registreren</a>
     </Paper>
   );
 }
