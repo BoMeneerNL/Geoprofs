@@ -1,0 +1,88 @@
+is_global = true
+build_property.TargetFramework = net6.0
+build_property.TargetPlatformMinVersion = 
+build_property.UsingMicrosoftNETSdkWeb = true
+build_property.ProjectTypeGuids = 
+build_property.InvariantGlobalization = 
+build_property.PlatformNeutralAssembly = 
+build_property._SupportedPlatformList = Linux,macOS,Windows
+build_property.RootNamespace = Geoprofs
+build_property.RootNamespace = Geoprofs
+build_property.ProjectDir = /Users/changwenjie/Repositories/Geoprofs/Geoprofs/
+build_property.RazorLangVersion = 6.0
+build_property.SupportLocalizedComponentNames = 
+build_property.GenerateRazorMetadataSourceChecksumAttributes = 
+build_property.MSBuildProjectDirectory = /Users/changwenjie/Repositories/Geoprofs/Geoprofs
+build_property._RazorSourceGeneratorDebug = 
+
+[/Users/changwenjie/Repositories/Geoprofs/Geoprofs/Views/Delete/User.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvRGVsZXRlL1VzZXIuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/changwenjie/Repositories/Geoprofs/Geoprofs/Views/Delete/Verlof.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvRGVsZXRlL1ZlcmxvZi5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/changwenjie/Repositories/Geoprofs/Geoprofs/Views/Insert/User.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvSW5zZXJ0L1VzZXIuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/changwenjie/Repositories/Geoprofs/Geoprofs/Views/Insert/Verlof.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvSW5zZXJ0L1ZlcmxvZi5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/changwenjie/Repositories/Geoprofs/Geoprofs/Views/Login/user.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvTG9naW4vdXNlci5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/changwenjie/Repositories/Geoprofs/Geoprofs/Views/Page/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvUGFnZS9JbmRleC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/changwenjie/Repositories/Geoprofs/Geoprofs/Views/Page/Login.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvUGFnZS9Mb2dpbi5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/changwenjie/Repositories/Geoprofs/Geoprofs/Views/Page/Register.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvUGFnZS9SZWdpc3Rlci5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/changwenjie/Repositories/Geoprofs/Geoprofs/Views/Page/Update.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvUGFnZS9VcGRhdGUuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/changwenjie/Repositories/Geoprofs/Geoprofs/Views/Page/Verlof.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvUGFnZS9WZXJsb2YuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/changwenjie/Repositories/Geoprofs/Geoprofs/Views/Page/VerlofAanvragen.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvUGFnZS9WZXJsb2ZBYW52cmFnZW4uY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/changwenjie/Repositories/Geoprofs/Geoprofs/Views/Shared/Error.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvU2hhcmVkL0Vycm9yLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/changwenjie/Repositories/Geoprofs/Geoprofs/Views/Shared/_Layout.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvU2hhcmVkL19MYXlvdXQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/changwenjie/Repositories/Geoprofs/Geoprofs/Views/Shared/_ValidationScriptsPartial.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvU2hhcmVkL19WYWxpZGF0aW9uU2NyaXB0c1BhcnRpYWwuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/changwenjie/Repositories/Geoprofs/Geoprofs/Views/Update/User.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvVXBkYXRlL1VzZXIuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/changwenjie/Repositories/Geoprofs/Geoprofs/Views/Update/VerlofStatusChange.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvVXBkYXRlL1ZlcmxvZlN0YXR1c0NoYW5nZS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/changwenjie/Repositories/Geoprofs/Geoprofs/Views/_ViewImports.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvX1ZpZXdJbXBvcnRzLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/changwenjie/Repositories/Geoprofs/Geoprofs/Views/_ViewStart.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvX1ZpZXdTdGFydC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 

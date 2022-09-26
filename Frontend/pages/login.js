@@ -70,9 +70,10 @@ export default function Login() {
                 variant="contained"
                 sx={{ mt: 3, mb: 2 }}
               >
-                Sign In
+                Inloggen
               </Button>
             </Box>
+            Geen account? <a onClick={() => router.push("/registratie")}>Registreren</a>
           </Box>
         </Container>
       </ThemeProvider>

@@ -44,5 +44,10 @@ namespace GPAPI.Controllers
            _context.SaveChanges();
             return Ok();
         }
+        //public ActionResult Login(Medewerker medewerker)
+        //{
+            
+        //    return Ok();
+        //}
     }
 }

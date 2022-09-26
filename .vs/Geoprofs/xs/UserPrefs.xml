@@ -1,0 +1,39 @@
+﻿<Properties StartupConfiguration="{C4198EED-7C72-4EFA-8841-DEA5D19B46FB}|Default">
+  <MonoDevelop.Ide.ItemProperties.api PreferredExecutionTarget="/Applications/Safari.app" />
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MonoDevelop.Ide.Workbench ActiveDocument="Geoprofs/Controllers/InsertController.cs">
+    <Files>
+      <File FileName="Geoprofs/Controllers/InsertController.cs" Line="27" Column="1" />
+      <File FileName="Geoprofs/Program.cs" Line="16" Column="1" />
+    </Files>
+    <Pads>
+      <Pad Id="ProjectPad">
+        <State name="__root__">
+          <Node name="Geoprofs" expanded="True">
+            <Node name="Geoprofs" expanded="True">
+              <Node name="Classes" expanded="True" />
+              <Node name="Controllers" expanded="True" />
+              <Node name="Database" expanded="True" />
+              <Node name="Views" expanded="True">
+                <Node name="Page" expanded="True" />
+              </Node>
+            </Node>
+          </Node>
+        </State>
+      </Pad>
+    </Pads>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.ItemProperties.Geoprofs PreferredExecutionTarget="/Applications/Google Chrome.app" />
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MultiItemStartupConfigurations>
+    <MultiItemSolutionRunConfiguration Id="Multiple Projects" Name="Multiple Projects">
+      <Items>
+        <StartupItem ItemId="{FD4A3056-9459-4034-97F8-04B6CE400755}" ItemName="api" ConfigurationId="Default" />
+        <StartupItem ItemId="{C4198EED-7C72-4EFA-8841-DEA5D19B46FB}" ItemName="Geoprofs" ConfigurationId="Default" />
+      </Items>
+    </MultiItemSolutionRunConfiguration>
+  </MultiItemStartupConfigurations>
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+</Properties>
