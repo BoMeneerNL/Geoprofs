@@ -19,13 +19,17 @@ export default function Register() {
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
 
-  const inputName = useRef()
-  const inputPassword = useRef()
-  const inputConfirmPassword = useRef()
+  const inputName = useRef();
+  const inputPassword = useRef();
+  const inputConfirmPassword = useRef();
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    if (name && password === confirmPassword) {
+    if (
+      name.length != 0 &&
+      password === confirmPassword &&
+      password.length != 0
+    ) {
       const data = new FormData(event.currentTarget);
       axios
         .put("http://localhost:11738/Medewerker", {
@@ -37,12 +41,16 @@ export default function Register() {
           router.push("/");
         });
     } else if (name.length === 0) {
-      console.log("voer naam in")
-      inputName.current.style.border="1px solid red";
+      inputName.current.style.border = "1px solid red";
+    } else if (
+      (name && password.length === 0) ||
+      (name && confirmPassword.length === 0)
+    ) {
+      inputPassword.current.style.border = "1px solid red";
+      inputConfirmPassword.current.style.border = "1px solid red";
     } else {
-      console.log("foutieve wachtwoord")
-      inputPassword.current.style.border="1px solid red";
-      inputConfirmPassword.current.style.border="1px solid red";
+      inputPassword.current.style.border = "1px solid red";
+      inputConfirmPassword.current.style.border = "1px solid red";
     }
   };
 
