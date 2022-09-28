@@ -1,4 +1,4 @@
-import * as React from "react";
+import React, { useRef, useState } from "react";
 import Button from "@mui/material/Button";
 import CssBaseline from "@mui/material/CssBaseline";
 import TextField from "@mui/material/TextField";
@@ -15,22 +15,35 @@ const theme = createTheme();
 export default function Register() {
   const router = useRouter();
 
+  const [name, setName] = useState("");
+  const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
+
+  const inputName = useRef()
+  const inputPassword = useRef()
+  const inputConfirmPassword = useRef()
+
   const handleSubmit = (event) => {
     event.preventDefault();
-    const data = new FormData(event.currentTarget);
-    console.log({
-      name: data.get("name"),
-      password: data.get("password"),
-    });
-    axios
-      .put("http://localhost:11738/Medewerker", {
-        isAdmin: false,
-        naam: data.get("name"),
-        wachtwoord: data.get("password"),
-      })
-      .then(() => {
-        router.push("/");
-      });
+    if (name && password === confirmPassword) {
+      const data = new FormData(event.currentTarget);
+      axios
+        .put("http://localhost:11738/Medewerker", {
+          isAdmin: false,
+          naam: data.get("name"),
+          wachtwoord: data.get("password"),
+        })
+        .then(() => {
+          router.push("/");
+        });
+    } else if (name.length === 0) {
+      console.log("voer naam in")
+      inputName.current.style.border="1px solid red";
+    } else {
+      console.log("foutieve wachtwoord")
+      inputPassword.current.style.border="1px solid red";
+      inputConfirmPassword.current.style.border="1px solid red";
+    }
   };
 
   return (
@@ -63,6 +76,9 @@ export default function Register() {
                 id="name"
                 name="name"
                 label="Naam"
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+                ref={inputName}
               />
               <TextField
                 margin="normal"
@@ -72,7 +88,10 @@ export default function Register() {
                 name="password"
                 label="Wachtwoord"
                 type="password"
-                autocomplete="current-password"
+                autoComplete="current-password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                ref={inputPassword}
               />
               <TextField
                 margin="normal"
@@ -82,8 +101,12 @@ export default function Register() {
                 name="repeat-password"
                 label="Herhaal wachtwoord"
                 type="password"
-                autocomplete="current-password"
+                autoComplete="current-password"
+                value={confirmPassword}
+                onChange={(e) => setConfirmPassword(e.target.value)}
+                ref={inputConfirmPassword}
               />
+              {}
               <Button
                 type="submit"
                 fullWidth
