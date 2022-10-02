@@ -12,5 +12,6 @@ namespace api.Models
         }
         public DbSet<Verlof> Verlof { get; set; }
         public DbSet<Medewerker> Medewerkers { get; set; }
+        public DbSet<Authtoken> Authtokens { get; set; }
     }
 }
