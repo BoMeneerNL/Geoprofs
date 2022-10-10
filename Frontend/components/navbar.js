@@ -1,5 +1,6 @@
 import Paper from "@mui/material/Paper";
 import { useRouter } from "next/router";
+import Link from "next/link";
 
 export default function Navbar() {
   const router = useRouter();
@@ -18,11 +19,21 @@ export default function Navbar() {
       }}
       sx={{ height: 80, backgroundColor: "#000" }}
     >
-      <a onClick={() => router.push("/")}>Personeelsoverzicht</a>
-      <a onClick={() => goto("/verlof")}>Verlofoverzicht</a>
-      <a onClick={() => goto("/verlofAanvragen")}>Verlof aanvragen</a>
-      <a onClick={() => goto("/login")}>Inloggen</a>
-      <a onClick={() => goto("/registratie")}>Registreren</a>
+      <Link href="/">
+        <a>Personeelsoverzicht</a>
+      </Link>
+      <Link href="/verlof">
+        <a>Verlofoverzicht</a>
+      </Link>
+      <Link href="/verlofAanvragen">
+        <a>Verlof aanvragen</a>
+      </Link>
+      <Link href="/login">
+        <a>Inloggen</a>
+      </Link>
+      <Link href="/registratie">
+        <a>Registreren</a>
+      </Link>
     </Paper>
   );
 }

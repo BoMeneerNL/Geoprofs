@@ -6,7 +6,6 @@ import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
-import Navbar from "../components/navbar";
 import { useRouter } from "next/router";
 import axios from "axios";
 
@@ -56,7 +55,6 @@ export default function Register() {
 
   return (
     <>
-      <Navbar />
       <ThemeProvider theme={theme}>
         <Container component="main" maxWidth="xs">
           <CssBaseline />

@@ -9,7 +9,6 @@ import Paper from "@mui/material/Paper";
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
 import axios from "axios";
-import Navbar from "../components/navbar";
 import { Typography } from "@mui/material";
 import { useEffect, useState } from "react";
 
@@ -111,7 +110,6 @@ export default function Home() {
 
   return (
     <>
-      <Navbar />
       <TableContainer
         component={Paper}
         sx={{ maxWidth: "75%", margin: "100px auto" }}

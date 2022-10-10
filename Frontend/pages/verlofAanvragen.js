@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import Navbar from "../components/navbar";
 import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
 import Box from "@mui/material/Box";
@@ -67,7 +66,6 @@ export default function VerlofAanvraag() {
   }, [tot]);
   return (
     <>
-      <Navbar />
       <Container component="main" maxWidth="xs">
         <Box
           sx={{

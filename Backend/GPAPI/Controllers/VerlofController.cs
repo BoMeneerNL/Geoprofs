@@ -2,7 +2,6 @@
 using GPAPI.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using System.Collections.Generic;
 using System.Linq;
 
 namespace GPAPI.Controllers
@@ -40,7 +39,8 @@ namespace GPAPI.Controllers
             verlof.Status = newstatus switch
             {
                 2 => 2,
-                3 => 3
+                3 => 3,
+                _=> 0
             };
             _context.Verlof.Update(verlof);
             _context.SaveChanges();

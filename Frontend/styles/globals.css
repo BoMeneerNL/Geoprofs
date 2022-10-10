@@ -15,3 +15,7 @@ a {
   color: inherit;
   cursor: pointer;
 }
+
+.MuiPaper-root {
+  border-radius: 0;
+}

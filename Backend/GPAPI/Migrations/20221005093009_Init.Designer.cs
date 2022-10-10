@@ -11,8 +11,8 @@ using api.Models;
 namespace GPAPI.Migrations
 {
     [DbContext(typeof(DBContext))]
-    [Migration("20220928094211_Authtokens")]
-    partial class Authtokens
+    [Migration("20221005093009_Init")]
+    partial class Init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {

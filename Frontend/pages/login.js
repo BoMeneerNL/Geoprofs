@@ -6,7 +6,6 @@ import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
-import Navbar from "../components/navbar";
 import { useRouter } from "next/router";
 
 const theme = createTheme();
@@ -25,7 +24,6 @@ export default function Login() {
 
   return (
     <>
-      <Navbar />
       <ThemeProvider theme={theme}>
         <Container component="main" maxWidth="xs">
           <CssBaseline />
@@ -62,7 +60,7 @@ export default function Login() {
                 name="password"
                 label="Wachtwoord"
                 type="password"
-                autocomplete="current-password"
+                autoComplete="current-password"
               />
               <Button
                 type="submit"
@@ -73,7 +71,8 @@ export default function Login() {
                 Inloggen
               </Button>
             </Box>
-            Geen account? <a onClick={() => router.push("/registratie")}>Registreren</a>
+            Geen account?{" "}
+            <a onClick={() => router.push("/registratie")}>Registreren</a>
           </Box>
         </Container>
       </ThemeProvider>

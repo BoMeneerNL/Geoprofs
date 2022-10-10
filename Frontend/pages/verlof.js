@@ -7,7 +7,6 @@ import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import axios from "axios";
-import Navbar from "../components/navbar";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 
@@ -66,7 +65,6 @@ export default function Verlof() {
   }, []);
   return (
     <>
-      <Navbar />
       <TableContainer
         component={Paper}
         sx={{ maxWidth: "75%", margin: "100px auto" }}
