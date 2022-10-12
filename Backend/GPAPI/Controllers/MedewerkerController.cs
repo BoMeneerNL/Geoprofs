@@ -24,13 +24,9 @@ namespace GPAPI.Controllers
         [HttpDelete("{id}")]
         public ActionResult Delete(int id)
         {
-            List<Verlof> verloven = _context.Verlof.ToList();
-            verloven.ForEach(x => {
-                if (x.MedewerkerId == id)
-                {
-                    _context.Verlof.Remove(x);
-                }
-            });
+            _context.Authtokens.RemoveRange(_context.Authtokens.Where(x => x.Medewerker.MedewerkerID == id));
+            _context.SaveChanges();
+            _context.Verlof.RemoveRange(_context.Verlof.Where(x => x.Medewerker.MedewerkerID == id));
             _context.SaveChanges();
             Medewerker medewerker = _context.Medewerkers.Find(id);
             _context.Medewerkers.Remove(medewerker);

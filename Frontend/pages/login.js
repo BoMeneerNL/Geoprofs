@@ -7,7 +7,7 @@ import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { useRouter } from "next/router";
-import { Cookie } from "@mui/icons-material";
+import Cookies from 'js-cookie'
 import axios from "axios"
 const theme = createTheme();
 
@@ -18,13 +18,10 @@ export default function Login() {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
     axios.post("http://localhost:11738/Login", data).then((response) => {
-      Cookie.set("authtoken", response.data);
+      Cookies.set("authtoken", response.data);
+      router.push("/");
     }).catch((e) => {
       console.log(e);
-    });
-    console.log({
-      name: data.get("name"),
-      password: data.get("password"),
     });
   };
 

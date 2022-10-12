@@ -37,7 +37,18 @@ namespace GPAPI.Controllers
         [HttpPost]
         public ActionResult LogMeIn()
         {
-            Medewerker medewerker = _context.Medewerkers.Where(x => x.MedewerkerID == Request.Form["MedewerkerID"] && x.Wachtwoord == Request.Form["Wachtwoord"]).FirstOrDefault();
+            Medewerker medewerker= _context.Medewerkers
+                .Where(x => x.Naam == Request.Form["name"].ToString())
+                .Where(x => x.Wachtwoord == Request.Form["password"].ToString())
+                .FirstOrDefault();
+            if (medewerker == null)
+            {
+                return Unauthorized();
+            }
+            string token = _context.Authtokens.Where(x => x.Medewerker == medewerker).Select(x => x.Token).FirstOrDefault();
+            if (token != null)
+                return Ok(token);
+
             string authtoken = Guid.NewGuid().ToString();
             List<string> Authtokens = _context.Authtokens.Select(x => x.Token).ToList();
             while (Authtokens.Contains(authtoken))
