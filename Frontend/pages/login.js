@@ -9,10 +9,18 @@ import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { useRouter } from "next/router";
 import Cookies from 'js-cookie'
 import axios from "axios"
+import { useEffect } from "react";
+import { GetAuthtoken } from "../scripts/Auth";
 const theme = createTheme();
 
 export default function Login() {
   const router = useRouter();
+
+  useEffect(() => {
+    if (Cookies.get("authtoken").length !== 0) {
+      router.push("/");
+    }
+  }, [router]);
 
   const handleSubmit = (event) => {
     event.preventDefault();

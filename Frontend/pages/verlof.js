@@ -56,6 +56,7 @@ export default function Verlof() {
                   ? "Afgewezen"
                   : "An error occured"}
               </StyledTableCell>
+              {console.log(row)}
               <StyledTableCell>{row.isAdmin ? "Yes" : "No"}</StyledTableCell>
             </StyledTableRow>
           );

@@ -6,7 +6,6 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
 using GPAPI.Models;
 using Microsoft.EntityFrameworkCore;
-using api.Models;
 
 namespace api
 {

@@ -1,8 +1,5 @@
-﻿using GPAPI.Models;
-using Microsoft.EntityFrameworkCore;
-using System.Collections.Generic;
-
-namespace api.Models
+﻿using Microsoft.EntityFrameworkCore;
+namespace GPAPI.Models
 {
     public class DBContext : DbContext
     {

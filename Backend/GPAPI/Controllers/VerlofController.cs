@@ -1,5 +1,4 @@
-﻿using api.Models;
-using GPAPI.Models;
+﻿using GPAPI.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System.Linq;
@@ -23,7 +22,8 @@ namespace GPAPI.Controllers
 
         [HttpGet]
         public ActionResult GetAllVerlof() {
-            var res = _context.Verlof.Include(x => x.Medewerker).Select(x => new { x.Medewerker.Naam, x.Van, x.Tot, x.Status }).ToList();
+            
+            var res = _context.Verlof.Include(x => x.Medewerker).Select(x => new { x.Medewerker.Naam, x.Van, x.Tot, x.Status,x.Medewerker.IsAdmin }).ToList();
             return Ok(res);
         }
         [HttpPost("/changestatus/{verlofid}/{newstatus}")]

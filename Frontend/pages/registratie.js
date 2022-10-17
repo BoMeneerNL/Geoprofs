@@ -8,6 +8,7 @@ import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { useRouter } from "next/router";
 import axios from "axios";
+import { Checkbox } from "@mui/material";
 
 const theme = createTheme();
 
@@ -35,7 +36,7 @@ export default function Register() {
           isAdmin: false,
           naam: data.get("name"),
           wachtwoord: data.get("password"),
-        })
+        })  
         .then(() => {
           router.push("/");
         });
@@ -112,6 +113,8 @@ export default function Register() {
                 onChange={(e) => setConfirmPassword(e.target.value)}
                 ref={inputConfirmPassword}
               />
+             
+              <Checkbox defaultChecked />
               {}
               <Button
                 type="submit"
