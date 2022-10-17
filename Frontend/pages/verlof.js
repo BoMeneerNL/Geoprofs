@@ -29,7 +29,8 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
     border: 0,
   },
 }));
-export default function Verlof() {
+
+export default function Verlof(props) {
   const router = useRouter();
   const [datafield, setDatafield] = useState([]);
   useEffect(() => {
@@ -57,7 +58,7 @@ export default function Verlof() {
                   : "An error occured"}
               </StyledTableCell>
               {console.log(row)}
-              <StyledTableCell>{row.isAdmin ? "Yes" : "No"}</StyledTableCell>
+              <StyledTableCell>{props.auth == 1 ? "Yes" : "No"}</StyledTableCell>
             </StyledTableRow>
           );
         })

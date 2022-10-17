@@ -36,7 +36,7 @@ export default function Register() {
           isAdmin: false,
           naam: data.get("name"),
           wachtwoord: data.get("password"),
-        })  
+        })
         .then(() => {
           router.push("/");
         });

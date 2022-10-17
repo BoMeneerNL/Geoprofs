@@ -13,14 +13,12 @@ import { useEffect } from "react";
 import { GetAuthtoken } from "../scripts/Auth";
 const theme = createTheme();
 
-export default function Login() {
+export default function Login(props) {
   const router = useRouter();
 
-  useEffect(() => {
-    if (Cookies.get("authtoken").length !== 0) {
-      router.push("/");
-    }
-  }, [router]);
+  if (props.auth !== -1) {
+    router.push("/");
+  }
 
   const handleSubmit = (event) => {
     event.preventDefault();

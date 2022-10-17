@@ -25,11 +25,11 @@ namespace GPAPI.Controllers
                 return NotFound();
             }
             else if (res.Select(x => x.Expires).First() <= (ulong)DateTimeOffset.Now.ToUnixTimeMilliseconds()) {
-                return Unauthorized();
+                return Ok(-1);
             }
             else
             {
-                return Ok(res.Select(x => x.IsAdmin).First());
+                return Ok(res.Select(x => x.IsAdmin).First() == true?1:0);
             }
 
         }
