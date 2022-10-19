@@ -18,14 +18,13 @@ namespace GPAPI.Controllers
         {
             var res = _context.Authtokens
                 .Where(x => x.Token == authtoken)
-                .Select(x => new { x.Expires, x.Medewerker.IsAdmin })
-                ;
+                .Select(x => new { x.Expires, x.Medewerker.IsAdmin });
             if (!res.Any())
             {
-                return NotFound();
+                return Unauthorized();
             }
             else if (res.Select(x => x.Expires).First() <= (ulong)DateTimeOffset.Now.ToUnixTimeMilliseconds()) {
-                return Ok(-1);
+                return Unauthorized();
             }
             else
             {
@@ -44,8 +43,9 @@ namespace GPAPI.Controllers
             {
                 return Unauthorized();
             }
-            string token = _context.Authtokens.Where(x => x.Medewerker == medewerker).Select(x => x.Token).FirstOrDefault();
-            if (token != null)
+            Authtoken token = _context.Authtokens.Where(x => x.Medewerker == medewerker).FirstOrDefault();
+            
+            if (token != null && token.Expires > (ulong)DateTimeOffset.Now.ToUnixTimeMilliseconds())
                 return Ok(token);
 
             string authtoken = Guid.NewGuid().ToString();

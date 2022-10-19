@@ -2,7 +2,7 @@ import axios from "axios";
 // @ts-ignore-next-line
 import Cookies from "js-cookie";
 
-export async function CheckAuthtoken(){
+export async function CheckAuthtoken() {
   const authtoken = GetAuthtoken();
   let returner;
   await axios
@@ -20,6 +20,6 @@ export async function CheckAuthtoken(){
   }
   return returner;
 }
-export function GetAuthtoken(){
+export function GetAuthtoken() {
   return Cookies.get("authtoken");
 }

@@ -113,7 +113,7 @@ export default function Register() {
                 onChange={(e) => setConfirmPassword(e.target.value)}
                 ref={inputConfirmPassword}
               />
-             
+
               <Checkbox defaultChecked />
               {}
               <Button

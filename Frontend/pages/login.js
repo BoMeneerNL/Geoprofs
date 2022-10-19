@@ -7,14 +7,13 @@ import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { useRouter } from "next/router";
-import Cookies from 'js-cookie'
-import axios from "axios"
-import { useEffect } from "react";
-import { GetAuthtoken } from "../scripts/Auth";
+import Cookies from "js-cookie";
+import axios from "axios";
 const theme = createTheme();
 
 export default function Login(props) {
   const router = useRouter();
+  console.log("wat is prop", props);
 
   if (props.auth !== -1) {
     router.push("/");
@@ -23,12 +22,15 @@ export default function Login(props) {
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
-    axios.post("http://localhost:11738/Login", data).then((response) => {
-      Cookies.set("authtoken", response.data);
-      router.push("/");
-    }).catch((e) => {
-      console.log(e);
-    });
+    axios
+      .post("http://localhost:11738/Login", data)
+      .then((response) => {
+        Cookies.set("authtoken", response.data);
+        router.push("/");
+      })
+      .catch((e) => {
+        console.log(e);
+      });
   };
 
   return (
