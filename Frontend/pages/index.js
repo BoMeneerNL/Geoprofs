@@ -37,7 +37,6 @@ export default function Home() {
   let datacollector = [];
   useEffect(() => {
     axios.get("http://localhost:11738/Medewerker").then((response) => {
-      console.log(response.data);
       datacollector = response.data;
       setDatafield(
         datacollector.map((row, key) => (
@@ -73,7 +72,6 @@ export default function Home() {
     axios
       .delete("http://localhost:11738/Medewerker/" + id)
       .then(() => {
-        console.log("deleted: " + id);
         datacollector.splice(key, 1);
         setDatafield(
           datacollector.map((row, key) => (
@@ -103,9 +101,7 @@ export default function Home() {
           ))
         );
       })
-      .catch((error) => {
-        console.log(error);
-      });
+      .catch((error) => {});
   }
 
   return (

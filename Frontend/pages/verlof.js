@@ -35,7 +35,6 @@ export default function Verlof(props) {
   const [datafield, setDatafield] = useState([]);
   useEffect(() => {
     axios.get("http://localhost:11738/Verlof").then((response) => {
-      console.log(response.data);
       setDatafield(
         response.data.map((row, key) => {
           const van = new Date(row.van * 1000).toLocaleDateString();
@@ -57,7 +56,6 @@ export default function Verlof(props) {
                   ? "Afgewezen"
                   : "An error occured"}
               </StyledTableCell>
-              {console.log(row)}
               <StyledTableCell>
                 {props.auth == 1 ? "Yes" : "No"}
               </StyledTableCell>

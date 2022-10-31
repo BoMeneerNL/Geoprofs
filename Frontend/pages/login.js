@@ -13,7 +13,6 @@ const theme = createTheme();
 
 export default function Login(props) {
   const router = useRouter();
-  console.log("wat is prop", props);
 
   if (props.auth !== -1) {
     router.push("/");
@@ -28,9 +27,7 @@ export default function Login(props) {
         Cookies.set("authtoken", response.data);
         router.push("/");
       })
-      .catch((e) => {
-        console.log(e);
-      });
+      .catch((e) => {});
   };
 
   return (

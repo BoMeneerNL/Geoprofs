@@ -1,9 +1,8 @@
 import "../styles/globals.css";
-import Navbar from "../components/Navbar";
+import Navbar from "../components/navbar";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import axios from "axios";
-import { GetAuthtoken } from "../scripts/Auth";
 import Cookies from "js-cookie";
 
 export default function MyApp({ Component, pageProps }) {
@@ -11,7 +10,6 @@ export default function MyApp({ Component, pageProps }) {
   const router = useRouter();
   useEffect(() => {
     if (typeof window !== "undefined") {
-      
       if (router.pathname !== "/login" && router.pathname !== "/register") {
         axios
           .get("http://localhost:11738/Login/" + Cookies.get("authtoken"))
@@ -22,13 +20,15 @@ export default function MyApp({ Component, pageProps }) {
               setAuthinf(response.data);
             }
           })
-          .catch((e) => {router.push("/login")});
+          .catch((e) => {
+            router.push("/login");
+          });
       }
-    } 
+    }
   }, [router, typeof window]);
   return (
     <>
-      <Navbar />
+      <Navbar authtypeid={authinf} />
       <Component {...pageProps} auth={authinf} />
     </>
   );

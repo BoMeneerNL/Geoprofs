@@ -1,12 +1,9 @@
 import Paper from "@mui/material/Paper";
-import { useRouter } from "next/router";
 import Link from "next/link";
 
-export default function Navbar() {
-  const router = useRouter();
-  function goto(gotolink) {
-    router.push(gotolink);
-  }
+export default function Navbar(props) {
+  const authtypeid = props.authtypeid;
+
   return (
     <Paper
       style={{
@@ -19,21 +16,11 @@ export default function Navbar() {
       }}
       sx={{ height: 80, backgroundColor: "#000" }}
     >
-      <Link href="/">
-        <a>Personeelsoverzicht</a>
-      </Link>
-      <Link href="/verlof">
-        <a>Verlofoverzicht</a>
-      </Link>
-      <Link href="/verlofAanvragen">
-        <a>Verlof aanvragen</a>
-      </Link>
-      <Link href="/login">
-        <a>Inloggen</a>
-      </Link>
-      <Link href="/registratie">
-        <a>Registreren</a>
-      </Link>
+      {authtypeid >= 2 ? <Link href="/">Personeelsoverzicht</Link> : <></>}
+      {authtypeid >= 1 ? <Link href="/verlof">Verlofoverzicht</Link> : <></>}
+      <Link href="/verlofAanvragen">Verlof aanvragen</Link>
+      {authtypeid > 0 ? <></> : <Link href="/login">Inloggen</Link>}
+      {authtypeid >= 2 ? <Link href="/registratie">Registreren</Link> : <></>}
     </Paper>
   );
 }

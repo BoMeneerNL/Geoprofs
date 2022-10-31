@@ -4,6 +4,12 @@ using System.Text.Json.Serialization;
 
 namespace GPAPI.Models
 {
+    public enum MedewerkerType
+    {
+        Directie,
+        Teammanager,
+        Medewerker
+    }
     public class Medewerker
     {
         [Key]
@@ -13,12 +19,7 @@ namespace GPAPI.Models
         public string Wachtwoord { get; set; }
         [JsonIgnore]
         public List<Verlof> Verlofs { get; set; }
-        public enum MedewerkerType
-        {
-            Directie,
-            Teammanager,
-            Medewerker
-        }
+        public int Medewerker
         public Team Team { get; set; }
     }
 }
