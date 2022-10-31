@@ -13,5 +13,12 @@ namespace GPAPI.Models
         public string Wachtwoord { get; set; }
         [JsonIgnore]
         public List<Verlof> Verlofs { get; set; }
+        public enum MedewerkerType
+        {
+            Directie,
+            Teammanager,
+            Medewerker
+        }
+        public Team Team { get; set; }
     }
 }

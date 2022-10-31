@@ -46,7 +46,7 @@ namespace GPAPI.Controllers
             Authtoken token = _context.Authtokens.Where(x => x.Medewerker == medewerker).FirstOrDefault();
             
             if (token != null && token.Expires > (ulong)DateTimeOffset.Now.ToUnixTimeMilliseconds())
-                return Ok(token);
+                return Ok(token.Token);
 
             string authtoken = Guid.NewGuid().ToString();
             List<string> Authtokens = _context.Authtokens.Select(x => x.Token).ToList();
