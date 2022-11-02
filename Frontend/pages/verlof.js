@@ -57,7 +57,7 @@ export default function Verlof(props) {
                   : "An error occured"}
               </StyledTableCell>
               <StyledTableCell>
-                {props.auth == 1 ? "Yes" : "No"}
+                {props.authinf >= 1 ? "Yes" : "No"}
               </StyledTableCell>
             </StyledTableRow>
           );

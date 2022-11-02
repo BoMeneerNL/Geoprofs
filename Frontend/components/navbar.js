@@ -2,7 +2,7 @@ import Paper from "@mui/material/Paper";
 import Link from "next/link";
 
 export default function Navbar(props) {
-  const authtypeid = props.authtypeid;
+  const authtype = props.authtype;
 
   return (
     <Paper
@@ -16,11 +16,12 @@ export default function Navbar(props) {
       }}
       sx={{ height: 80, backgroundColor: "#000" }}
     >
-      {authtypeid >= 2 ? <Link href="/">Personeelsoverzicht</Link> : <></>}
-      {authtypeid >= 1 ? <Link href="/verlof">Verlofoverzicht</Link> : <></>}
+      {authtype.medewerkerType >= 2 ? <Link href="/">Personeelsoverzicht</Link> : <></>}
+      {authtype.medewerkerType >= 0 ? <Link href="/verlof">Verlofoverzicht</Link> : <></>}
       <Link href="/verlofAanvragen">Verlof aanvragen</Link>
-      {authtypeid > 0 ? <></> : <Link href="/login">Inloggen</Link>}
-      {authtypeid >= 2 ? <Link href="/registratie">Registreren</Link> : <></>}
+      {authtype.medewerkerType >= 0 ? <></> : <Link href="/login">Inloggen</Link>}
+      {authtype.medewerkerType >= 2 ? <Link href="/registratie">Registreren</Link> : <></>}
+      {authtype.medewerkerType >= 0 ? <Link href="/logout">Uitloggen</Link> : <></>}
     </Paper>
   );
 }

@@ -11,6 +11,7 @@ import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
 import axios from "axios";
 import { Typography } from "@mui/material";
 import { useEffect, useState } from "react";
+import { useRouter } from "next/router";
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
@@ -32,40 +33,45 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
   },
 }));
 
-export default function Home() {
+export default function Home(props) {
   const [datafield, setDatafield] = useState([]);
+  const router = useRouter();
   let datacollector = [];
   useEffect(() => {
-    axios.get("http://localhost:11738/Medewerker").then((response) => {
-      datacollector = response.data;
-      setDatafield(
-        datacollector.map((row, key) => (
-          <StyledTableRow key={key}>
-            <StyledTableCell component="th" scope="row">
-              {row.naam}
-            </StyledTableCell>
-            <StyledTableCell>{row.wachtwoord}</StyledTableCell>
-            <StyledTableCell>
-              {row.isAdmin ? (
-                <>
-                  <EditIcon sx={{ pointer: "cursor" }} />
-                  <DeleteForeverIcon
-                    sx={{ pointer: "cursor" }}
-                    onClick={() => {
-                      deleteMedewerker(row.medewerkerID, key);
-                    }}
-                  />
-                </>
-              ) : (
-                <Typography>
-                  Je hebt geen rechten om iets aan te passen
-                </Typography>
-              )}
-            </StyledTableCell>
-          </StyledTableRow>
-        ))
-      );
-    });
+    if (props.auth < 2 ) {
+      router.push("/verlof")
+    } else {
+      axios.get("http://localhost:11738/Medewerker").then((response) => {
+        datacollector = response.data;
+        setDatafield(
+          datacollector.map((row, key) => (
+            <StyledTableRow key={key}>
+              <StyledTableCell component="th" scope="row">
+                {row.naam}
+              </StyledTableCell>
+              <StyledTableCell>{row.wachtwoord}</StyledTableCell>
+              <StyledTableCell>
+                {row.isAdmin ? (
+                  <>
+                    <EditIcon sx={{ pointer: "cursor" }} />
+                    <DeleteForeverIcon
+                      sx={{ pointer: "cursor" }}
+                      onClick={() => {
+                        deleteMedewerker(row.medewerkerID, key);
+                      }}
+                    />
+                  </>
+                ) : (
+                  <Typography>
+                    Je hebt geen rechten om iets aan te passen
+                  </Typography>
+                )}
+              </StyledTableCell>
+            </StyledTableRow>
+          ))
+        );
+      });
+    }
   }, []);
 
   function deleteMedewerker(id, key) {

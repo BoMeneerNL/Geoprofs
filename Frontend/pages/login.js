@@ -14,10 +14,6 @@ const theme = createTheme();
 export default function Login(props) {
   const router = useRouter();
 
-  if (props.auth !== -1) {
-    router.push("/");
-  }
-
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
@@ -25,7 +21,7 @@ export default function Login(props) {
       .post("http://localhost:11738/Login", data)
       .then((response) => {
         Cookies.set("authtoken", response.data);
-        router.push("/");
+        router.push("/verlof");
       })
       .catch((e) => {});
   };
