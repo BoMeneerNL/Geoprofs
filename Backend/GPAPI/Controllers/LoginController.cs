@@ -18,17 +18,19 @@ namespace GPAPI.Controllers
         {
             var res = _context.Authtokens
                 .Where(x => x.Token == authtoken)
-                .Select(x => new { x.Expires, x.Medewerker.IsAdmin });
-            if (!res.Any())
+                .Select(x => new { x.Expires, x.MedewerkerId }).FirstOrDefault();
+            if (res == null)
             {
                 return Unauthorized();
             }
-            else if (res.Select(x => x.Expires).First() <= (ulong)DateTimeOffset.Now.ToUnixTimeMilliseconds()) {
+            else if (res.Expires <= (ulong)DateTimeOffset.Now.ToUnixTimeMilliseconds()) {
                 return Unauthorized();
             }
             else
             {
-                return Ok(res.Select(x => x.IsAdmin).First() == true?1:0);
+                Medewerker userinfo = _context.Medewerkers.Find(res.MedewerkerId);
+                var rslt = new { userinfo.MedewerkerType,userinfo.Team};
+                return Ok(rslt);
             }
 
         }
