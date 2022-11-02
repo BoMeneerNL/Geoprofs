@@ -19,7 +19,7 @@ namespace GPAPI.Models
         public string Wachtwoord { get; set; }
         [JsonIgnore]
         public List<Verlof> Verlofs { get; set; }
-        public int Medewerker
+        public int MedewerkerType { get; set; }
         public Team Team { get; set; }
     }
 }
