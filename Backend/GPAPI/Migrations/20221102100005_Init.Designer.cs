@@ -11,7 +11,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace GPAPI.Migrations
 {
     [DbContext(typeof(DBContext))]
-    [Migration("20221031092516_Init")]
+    [Migration("20221102100005_Init")]
     partial class Init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -44,6 +44,9 @@ namespace GPAPI.Migrations
                         .HasColumnType("INTEGER");
 
                     b.Property<bool>("IsAdmin")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("MedewerkerType")
                         .HasColumnType("INTEGER");
 
                     b.Property<string>("Naam")

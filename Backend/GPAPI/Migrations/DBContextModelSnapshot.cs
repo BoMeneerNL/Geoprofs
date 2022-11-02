@@ -44,6 +44,9 @@ namespace GPAPI.Migrations
                     b.Property<bool>("IsAdmin")
                         .HasColumnType("INTEGER");
 
+                    b.Property<int>("MedewerkerType")
+                        .HasColumnType("INTEGER");
+
                     b.Property<string>("Naam")
                         .HasColumnType("TEXT");
 

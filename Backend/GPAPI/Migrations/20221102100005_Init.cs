@@ -30,6 +30,7 @@ namespace GPAPI.Migrations
                     IsAdmin = table.Column<bool>(type: "INTEGER", nullable: false),
                     Naam = table.Column<string>(type: "TEXT", nullable: true),
                     Wachtwoord = table.Column<string>(type: "TEXT", nullable: true),
+                    MedewerkerType = table.Column<int>(type: "INTEGER", nullable: false),
                     TeamID = table.Column<int>(type: "INTEGER", nullable: true)
                 },
                 constraints: table =>
