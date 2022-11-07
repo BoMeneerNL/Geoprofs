@@ -18,7 +18,7 @@ namespace GPAPI.Controllers
         {
             var res = _context.Authtokens
                 .Where(x => x.Token == authtoken)
-                .Select(x => new { x.Expires, x.MedewerkerId }).FirstOrDefault();
+                .Select(x => new { x.Expires, x.MedewerkerID }).FirstOrDefault();
             if (res == null)
             {
                 return Unauthorized();
@@ -28,8 +28,8 @@ namespace GPAPI.Controllers
             }
             else
             {
-                Medewerker userinfo = _context.Medewerkers.Find(res.MedewerkerId);
-                var rslt = new { userinfo.MedewerkerType,userinfo.Team};
+                Medewerker userinfo = _context.Medewerkers.Find(res.MedewerkerID);
+                var rslt = new { userinfo.MedewerkerType,userinfo.TeamID};
                 return Ok(rslt);
             }
 
@@ -45,7 +45,7 @@ namespace GPAPI.Controllers
             {
                 return Unauthorized();
             }
-            Authtoken token = _context.Authtokens.Where(x => x.Medewerker == medewerker).FirstOrDefault();
+            Authtoken token = _context.Authtokens.Where(x => _context.Medewerkers.Find(x.MedewerkerID) == medewerker).FirstOrDefault();
             
             if (token != null && token.Expires > (ulong)DateTimeOffset.Now.ToUnixTimeMilliseconds())
                 return Ok(token.Token);
@@ -58,7 +58,7 @@ namespace GPAPI.Controllers
             }
             Authtoken _temp = new()
             {
-                Medewerker = medewerker,
+                MedewerkerID = medewerker.MedewerkerID,
                 Token = authtoken,
                 Expires = (ulong)DateTimeOffset.UtcNow.ToUnixTimeMilliseconds() + 10800000
             };

@@ -19,13 +19,6 @@ namespace GPAPI.Controllers
             _context.SaveChanges();
             return Ok();
         }
-
-        [HttpGet]
-        public ActionResult GetAllVerlof() {
-            
-            var res = _context.Verlof.Include(x => x.Medewerker).Select(x => new { x.Medewerker.Naam, x.Van, x.Tot, x.Status,x.Medewerker.IsAdmin }).ToList();
-            return Ok(res);
-        }
         [HttpPost("/changestatus/{verlofid}/{newstatus}")]
         public ActionResult ChangeVerlofStatus(int verlofid,byte newstatus)
         {

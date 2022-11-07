@@ -13,13 +13,13 @@ namespace GPAPI.Models
     public class Medewerker
     {
         [Key]
-        public int MedewerkerID { get; set; }
+        public ulong MedewerkerID { get; set; }
         public bool IsAdmin { get; set; }
         public string Naam { get; set; }
         public string Wachtwoord { get; set; }
         [JsonIgnore]
         public List<Verlof> Verlofs { get; set; }
         public int MedewerkerType { get; set; }
-        public Team Team { get; set; }
+        public int TeamID { get; set; }
     }
 }

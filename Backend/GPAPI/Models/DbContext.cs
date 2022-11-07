@@ -10,5 +10,6 @@ namespace GPAPI.Models
         public DbSet<Verlof> Verlof { get; set; }
         public DbSet<Medewerker> Medewerkers { get; set; }
         public DbSet<Authtoken> Authtokens { get; set; }
+        public DbSet<Team> Teams { get; set; }
     }
 }

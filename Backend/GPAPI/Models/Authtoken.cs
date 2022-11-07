@@ -7,9 +7,7 @@ namespace GPAPI.Models
     {
         [Key]
         public string Token { get; set; }
-        [JsonIgnore]
-        public Medewerker Medewerker { get; set; }
-        public int MedewerkerId { get; set; }
+        public ulong MedewerkerID { get; set; }
         public ulong Expires { get; set; }
 
     }
