@@ -9,15 +9,25 @@ import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { useRouter } from "next/router";
 import axios from "axios";
 import { Checkbox } from "@mui/material";
+import InputLabel from "@mui/material/InputLabel";
+import Select from "@mui/material/Select";
+import MenuItem from "@mui/material/MenuItem";
 
 const theme = createTheme();
 
 export default function Register() {
   const router = useRouter();
 
+  const teams = [
+    "Team 1",
+    "Team 2",
+    "Team 3",
+  ]
+
   const [name, setName] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
+  let [curTeam, setCurTeam] = useState(teams[0]);  
 
   const inputName = useRef();
   const inputPassword = useRef();
@@ -76,6 +86,26 @@ export default function Register() {
               noValidate
               sx={{ mt: 1 }}
             >
+              <InputLabel id="select-label">Team</InputLabel>
+              <Select
+                style={{ width: "100%" }}
+                labelId="select-label"
+                id="select"
+                defaultValue={curTeam}
+                onChange={(e) => {
+                  console.log(e, curTeam)
+                  setCurTeam(e.target.value)
+                }}
+              >
+                
+                {/* <MenuItem key="2" value="2">2</MenuItem>
+                <MenuItem key="3" value="3">3</MenuItem> */}
+                
+                {teams.map((team) => {
+                  console.log(team)
+                  return <MenuItem key={team} value={team}>{team}</MenuItem>;
+                })}
+              </Select>
               <TextField
                 margin="normal"
                 required
