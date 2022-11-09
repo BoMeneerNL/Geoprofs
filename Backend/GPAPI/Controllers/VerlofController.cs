@@ -12,6 +12,12 @@ namespace GPAPI.Controllers
         private readonly DBContext _context;
 
         public VerlofController(DBContext context) => _context = context;
+        [HttpGet]
+        public ActionResult GetVerlof()
+        {
+            var res = _context.Verlof.Select(x => new { x.VerlofID, x.MedewerkerID, x.Reden,x.Van,x.Tot}).ToList();
+            return Ok(res);
+        }
         [HttpPut]
         public ActionResult CreateNewVerlof(Verlof verlof)
         {
