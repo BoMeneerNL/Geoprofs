@@ -18,16 +18,12 @@ const theme = createTheme();
 export default function Register() {
   const router = useRouter();
 
-  const teams = [
-    "Team 1",
-    "Team 2",
-    "Team 3",
-  ]
+  const teams = ["Team 1", "Team 2", "Team 3"];
 
   const [name, setName] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
-  let [curTeam, setCurTeam] = useState(teams[0]);  
+  let [curTeam, setCurTeam] = useState(teams[0]);
 
   const inputName = useRef();
   const inputPassword = useRef();
@@ -93,17 +89,20 @@ export default function Register() {
                 id="select"
                 defaultValue={curTeam}
                 onChange={(e) => {
-                  console.log(e, curTeam)
-                  setCurTeam(e.target.value)
+                  console.log(e, curTeam);
+                  setCurTeam(e.target.value);
                 }}
               >
-                
                 {/* <MenuItem key="2" value="2">2</MenuItem>
                 <MenuItem key="3" value="3">3</MenuItem> */}
-                
+
                 {teams.map((team) => {
-                  console.log(team)
-                  return <MenuItem key={team} value={team}>{team}</MenuItem>;
+                  console.log(team);
+                  return (
+                    <MenuItem key={team} value={team}>
+                      {team}
+                    </MenuItem>
+                  );
                 })}
               </Select>
               <TextField

@@ -16,12 +16,32 @@ export default function Navbar(props) {
       }}
       sx={{ height: 80, backgroundColor: "#000" }}
     >
-      {authtype.medewerkerType >= 2 ? <Link href="/">Personeelsoverzicht</Link> : <></>}
-      {authtype.medewerkerType >= 0 ? <Link href="/verlof">Verlofoverzicht</Link> : <></>}
+      {authtype.medewerkerType >= 2 ? (
+        <Link href="/">Personeelsoverzicht</Link>
+      ) : (
+        <></>
+      )}
+      {authtype.medewerkerType >= 0 ? (
+        <Link href="/verlof">Verlofoverzicht</Link>
+      ) : (
+        <></>
+      )}
       <Link href="/verlofAanvragen">Verlof aanvragen</Link>
-      {authtype.medewerkerType >= 0 ? <></> : <Link href="/login">Inloggen</Link>}
-      {authtype.medewerkerType >= 2 ? <Link href="/registratie">Registreren</Link> : <></>}
-      {authtype.medewerkerType >= 0 ? <Link href="/logout">Uitloggen</Link> : <></>}
+      {authtype.medewerkerType >= 0 ? (
+        <></>
+      ) : (
+        <Link href="/login">Inloggen</Link>
+      )}
+      {authtype.medewerkerType >= 2 ? (
+        <Link href="/registratie">Registreren</Link>
+      ) : (
+        <></>
+      )}
+      {authtype.medewerkerType >= 0 ? (
+        <Link href="/logout">Uitloggen</Link>
+      ) : (
+        <></>
+      )}
     </Paper>
   );
 }

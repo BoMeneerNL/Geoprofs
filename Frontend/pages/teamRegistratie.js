@@ -7,67 +7,88 @@ import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { useRouter } from "next/router";
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableContainer,
+  TableHead,
+  TableRow,
+  Modal,
+} from "@mui/material";
+import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 
 const theme = createTheme();
-
+const style = {
+  position: 'absolute',
+  top: '50%',
+  left: '50%',
+  transform: 'translate(-50%, -50%)',
+  width: 400,
+  bgcolor: 'background.paper',
+  border: '2px solid #000',
+  boxShadow: 24,
+  p: 4,
+};
+import axios from "axios";
 export default function Register() {
+    const [open, setOpen] = useState(false);
+    const [modalDOM, setModalDOM] = useState(<></>);
+  const [teams, setTeams] = useState([]);
   const router = useRouter();
-
-  const [name, setName] = useState("");  
-
   const inputName = useRef();
-
   const handleSubmit = (event) => {
     event.preventDefault();
 
-    console.log("hi")
-    
+    console.log("hi");
   };
-
+  useEffect(() => {
+    axios.get("http://localhost:11738/Teams").then((response) => {
+    console.log(response.data);
+    setTeams(response.data);
+  });
+  }, []);
   return (
     <>
       <ThemeProvider theme={theme}>
         <Container component="main" maxWidth="xs">
-          <CssBaseline />
-          <Box
-            sx={{
-              marginTop: 8,
-              display: "flex",
-              flexDirection: "column",
-              alignItems: "center",
-            }}
-          >
-            <Typography component="h1" variant="h5">
-              Registreren
-            </Typography>
-            <Box
-              component="form"
-              onSubmit={handleSubmit}
-              noValidate
-              sx={{ mt: 1 }}
-            >
-              <TextField
-                margin="normal"
-                required
-                fullWidth
-                id="name"
-                name="name"
-                label="Teamnaam"
-                value={name}
-                onChange={(e) => setName(e.target.value)}
-                ref={inputName}
-              />
-              <Button
-                type="submit"
-                fullWidth
-                variant="contained"
-                sx={{ mt: 3, mb: 2 }}
-              >
-                Registreren
-              </Button>
-            </Box>
-          </Box>
+          <Table sx={{ minWidth: 650 }} aria-label="simple table">
+            <TableHead>
+              <TableRow>
+                <TableCell>Team name</TableCell>
+                <TableCell>Acties</TableCell>
+              </TableRow>
+            </TableHead>
+            <TableBody>
+              {teams.map((team,idx) => (
+                <TableRow
+                  key={team.idx}
+                  sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
+                >
+                  <TableCell component="th" scope="row">
+                    {team.naam}
+                  </TableCell>
+                  <TableCell align="right"><DeleteForeverIcon onClick={()=>{
+                    axios.delete(`http://localhost:11738/Teams/${team.teamID}`).then((response) => {
+                        window.location.reload();
+                    })}}/>
+                    </TableCell>
+                </TableRow>
+              ))}
+            </TableBody>
+          </Table>
         </Container>
+        <Modal
+          open={open}
+          onClose={() => {
+            setOpen(false);
+            setModalDOM(<></>);
+          }}
+          aria-labelledby="modal-modal-title"
+          aria-describedby="modal-modal-description"
+        >
+          <Box sx={style}>{modalDOM}</Box>
+        </Modal>
       </ThemeProvider>
     </>
   );

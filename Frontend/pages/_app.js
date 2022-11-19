@@ -8,10 +8,14 @@ import Cookies from "js-cookie";
 export default function MyApp({ Component, pageProps }) {
   const [authinf, setAuthinf] = useState({});
   const router = useRouter();
-console.log(authinf);
+  console.log(authinf);
   useEffect(() => {
     if (typeof window !== "undefined") {
-      if (router.pathname !== "logout" && router.pathname !== "/login" && router.pathname !== "/register") {
+      if (
+        router.pathname !== "logout" &&
+        router.pathname !== "/login" &&
+        router.pathname !== "/register"
+      ) {
         axios
           .get("http://localhost:11738/Login/" + Cookies.get("authtoken"))
           .then((response) => {
@@ -30,7 +34,7 @@ console.log(authinf);
 
   return (
     <>
-      {router.pathname !== "/login"?<Navbar authtype={authinf} />:<></>}
+      {router.pathname !== "/login" ? <Navbar authtype={authinf} /> : <></>}
       <Component {...pageProps} auth={authinf} />
     </>
   );

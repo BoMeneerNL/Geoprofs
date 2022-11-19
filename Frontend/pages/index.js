@@ -38,8 +38,8 @@ export default function Home(props) {
   const router = useRouter();
   let datacollector = [];
   useEffect(() => {
-    if (props.auth < 2 ) {
-      router.push("/verlof")
+    if (props.auth < 2) {
+      router.push("/verlof");
     } else {
       axios.get("http://localhost:11738/Medewerker").then((response) => {
         datacollector = response.data;
