@@ -15,7 +15,7 @@ namespace GPAPI.Controllers
         [HttpGet]
         public ActionResult GetVerlof()
         {
-            var res = _context.Verlof.Select(x => new { x.VerlofID, x.MedewerkerID, x.Reden,x.Van,x.Tot}).ToList();
+            var res = _context.Verlof.Select(x => new { x.VerlofID, x.MedewerkerID, x.Reden,x.Van,x.Tot, x.Status}).ToList();
             return Ok(res);
         }
         [HttpPut]
