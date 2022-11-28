@@ -15,8 +15,16 @@ namespace GPAPI.Controllers
         [HttpGet]
         public ActionResult GetVerlof()
         {
-            var res = _context.Verlof.Select(x => new { x.VerlofID, x.MedewerkerID, x.Reden,x.Van,x.Tot, x.Status}).ToList();
-            return Ok(res);
+            string Naam = "";
+            var res = _context.Verlof.Select(x => new { x.VerlofID, x.MedewerkerID, x.Reden, x.Van, x.Tot, Naam }).ToArray();
+            for (int i = 0; i < res.Length; i++)
+            {
+                string tmpnaam = _context.Medewerkers.Where(x => x.MedewerkerID == res[i].MedewerkerID).Select(x => x.Naam).FirstOrDefault();
+                var tempobj = new { res[i].VerlofID, res[i].MedewerkerID, res[i].Reden, res[i].Van, res[i].Tot, Naam = tmpnaam };
+                res[i] = tempobj;
+            }
+
+            return Ok(res.ToList());
         }
         [HttpPut]
         public ActionResult CreateNewVerlof(Verlof verlof)
