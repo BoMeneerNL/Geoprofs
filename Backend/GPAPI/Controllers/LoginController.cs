@@ -29,7 +29,7 @@ namespace GPAPI.Controllers
             else
             {
                 Medewerker userinfo = _context.Medewerkers.Find(res.MedewerkerID);
-                var rslt = new { userinfo.MedewerkerType,userinfo.TeamID};
+                var rslt = new { userinfo.MedewerkerID, userinfo.MedewerkerType, userinfo.TeamID };
                 return Ok(rslt);
             }
 
