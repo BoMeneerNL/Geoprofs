@@ -33,36 +33,42 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
 export default function Verlof(props) {
   const router = useRouter();
   const [datafield, setDatafield] = useState([]);
+  const medewerkerId = props.auth['medewerkerID'];
   useEffect(() => {
     axios.get("http://localhost:11738/Verlof").then((response) => {
-      setDatafield(
-        response.data.map((row, key) => {
-          const van = new Date(row.van * 1000).toLocaleDateString();
-          const tot = new Date(row.tot * 1000).toLocaleDateString();
-
-          return (
-            <StyledTableRow key={key}>
-              <StyledTableCell component="th" scope="row">
-                {row.naam}
-              </StyledTableCell>
-              <StyledTableCell>{van}</StyledTableCell>
-              <StyledTableCell>{tot}</StyledTableCell>
-              <StyledTableCell>
-                {row.status === 1
-                  ? "nog niet beoordeeld"
-                  : row.status === 2
-                  ? "Goedgekeurd"
-                  : row.status === 3
-                  ? "Afgewezen"
-                  : "An error occured"}
-              </StyledTableCell>
-              <StyledTableCell>
-                {props.authinf >= 1 ? "Yes" : "No"}
-              </StyledTableCell>
-            </StyledTableRow>
+      console.log("wat is response", response.data)
+      for (let i = 0; i < response.data.length; i++) {
+        if (response.data[i]['medewerkerID'] === medewerkerId) {
+          console.log(response.data[i]);
+          setDatafield(
+            response.data.map((row, key) => {
+              const van = new Date(row.van * 1000).toLocaleDateString();
+              const tot = new Date(row.tot * 1000).toLocaleDateString();
+              return (
+                <StyledTableRow key={key}>
+                  <StyledTableCell component="th" scope="row">
+                    {row.naam}
+                  </StyledTableCell>
+                  <StyledTableCell>{van}</StyledTableCell>
+                  <StyledTableCell>{tot}</StyledTableCell>
+                  <StyledTableCell>
+                    {row.status === 1
+                      ? "nog niet beoordeeld"
+                      : row.status === 2
+                      ? "Goedgekeurd"
+                      : row.status === 3
+                      ? "Afgewezen"
+                      : "An error occured"}
+                  </StyledTableCell>
+                  <StyledTableCell>
+                    {props.auth.medewerkerType >= 1 ? <></> : "No access"}
+                  </StyledTableCell>
+                </StyledTableRow>
+              );
+            })
           );
-        })
-      );
+        }
+      }
     });
   }, []);
   return (
