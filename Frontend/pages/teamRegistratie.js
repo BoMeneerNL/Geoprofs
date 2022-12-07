@@ -16,24 +16,24 @@ import {
   TableRow,
   Modal,
 } from "@mui/material";
-import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
+import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
 
 const theme = createTheme();
 const style = {
-  position: 'absolute',
-  top: '50%',
-  left: '50%',
-  transform: 'translate(-50%, -50%)',
+  position: "absolute",
+  top: "50%",
+  left: "50%",
+  transform: "translate(-50%, -50%)",
   width: 400,
-  bgcolor: 'background.paper',
-  border: '2px solid #000',
+  bgcolor: "background.paper",
+  border: "2px solid #000",
   boxShadow: 24,
   p: 4,
 };
 import axios from "axios";
 export default function Register() {
-    const [open, setOpen] = useState(false);
-    const [modalDOM, setModalDOM] = useState(<></>);
+  const [open, setOpen] = useState(false);
+  const [modalDOM, setModalDOM] = useState(<></>);
   const [teams, setTeams] = useState([]);
   const router = useRouter();
   const inputName = useRef();
@@ -44,9 +44,9 @@ export default function Register() {
   };
   useEffect(() => {
     axios.get("http://localhost:11738/Teams").then((response) => {
-    console.log(response.data);
-    setTeams(response.data);
-  });
+      console.log(response.data);
+      setTeams(response.data);
+    });
   }, []);
   return (
     <>
@@ -60,7 +60,7 @@ export default function Register() {
               </TableRow>
             </TableHead>
             <TableBody>
-              {teams.map((team,idx) => (
+              {teams.map((team, idx) => (
                 <TableRow
                   key={team.idx}
                   sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
@@ -68,11 +68,17 @@ export default function Register() {
                   <TableCell component="th" scope="row">
                     {team.naam}
                   </TableCell>
-                  <TableCell align="right"><DeleteForeverIcon onClick={()=>{
-                    axios.delete(`http://localhost:11738/Teams/${team.teamID}`).then((response) => {
-                        window.location.reload();
-                    })}}/>
-                    </TableCell>
+                  <TableCell align="right">
+                    <DeleteForeverIcon
+                      onClick={() => {
+                        axios
+                          .delete(`http://localhost:11738/Teams/${team.teamID}`)
+                          .then((response) => {
+                            window.location.reload();
+                          });
+                      }}
+                    />
+                  </TableCell>
                 </TableRow>
               ))}
             </TableBody>
