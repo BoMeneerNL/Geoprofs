@@ -8,6 +8,7 @@ namespace GPAPI.Models
     {
         [Key]
         public int VerlofID { get; set; }
+        public int TeamID { get; set; }
         public ulong MedewerkerID { get; set; }
         public uint Van { get; set; }
         public uint Tot { get; set; }

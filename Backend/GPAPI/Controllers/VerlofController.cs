@@ -16,11 +16,11 @@ namespace GPAPI.Controllers
         public ActionResult GetVerlof()
         {
             string Naam = "";
-            var res = _context.Verlof.Select(x => new {x.VerlofID, x.MedewerkerID, x.Reden, x.Status, x.Van, x.Tot, Naam }).ToArray();
+            var res = _context.Verlof.Select(x => new {x.VerlofID, x.TeamID, x.MedewerkerID, x.Reden, x.Status, x.Van, x.Tot, Naam }).ToArray();
             for (int i = 0; i < res.Length; i++)
             {
                 string tmpnaam = _context.Medewerkers.Where(x => x.MedewerkerID == res[i].MedewerkerID).Select(x => x.Naam).FirstOrDefault();
-                var tempobj = new { res[i].VerlofID, res[i].MedewerkerID, res[i].Reden, res[i].Status, res[i].Van, res[i].Tot, Naam = tmpnaam };
+                var tempobj = new { res[i].VerlofID, res[i].TeamID, res[i].MedewerkerID, res[i].Reden, res[i].Status, res[i].Van, res[i].Tot, Naam = tmpnaam };
                 res[i] = tempobj;
             }
 
