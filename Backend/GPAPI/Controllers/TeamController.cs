@@ -22,11 +22,11 @@ namespace GPAPI.Controllers
             return Ok(_context.Teams.Find(id));
         }
         [HttpPost]
-        public ActionResult AddTeam()
+        public ActionResult AddTeam(string naam)
         {
             Team team = new()
             {
-                Naam = Request.Form["name"].ToString()
+                Naam = naam
             };
             _context.Teams.Add(team);
             _context.SaveChanges();

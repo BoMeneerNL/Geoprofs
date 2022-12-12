@@ -4,8 +4,7 @@ namespace GPAPI.Models
 {
     public class Team
     {
-        [Key]
-        public ulong TeamID { get; set; }
+        public int Id { get; set; }
         public string Naam { get; set; }
     }
 }
