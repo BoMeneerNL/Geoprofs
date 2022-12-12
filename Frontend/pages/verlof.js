@@ -42,12 +42,14 @@ export default function Verlof(props) {
   const router = useRouter();
   const [datafield, setDatafield] = useState([]);
   const medewerkerId = props.auth['medewerkerID'];
+  const teamId = props.auth['teamID'];
   useEffect(() => {
     axios.get("http://localhost:11738/Verlof").then((response) => {
       setDatafield(
         response.data.map((row, key) => {
-          console.log(row)
-          if (row['medewerkerID'] === medewerkerId || props.auth['medewerkerType'] >= 1) {
+          console.log("props data:", props.auth);
+          console.log("row data:", row);
+          if (props.auth['medewerkerType'] === 0 && row['medewerkerID'] === medewerkerId || props.auth['medewerkerType'] === 1 && row['teamID'] === teamId) {
             const van = new Date(row.van * 1000).toLocaleDateString();
             const tot = new Date(row.tot * 1000).toLocaleDateString();
             return (
@@ -67,7 +69,7 @@ export default function Verlof(props) {
                     : "An error occured"}
                 </StyledTableCell>
                 <StyledTableCell>
-                  {props.auth['medewerkerType'] >= 1 ? <><Button onClick={() => {changeStatus(row.verlofID, 2)}}>Goedkeuren</Button><Button onClick={() => {changeStatus(row.verlofID, 3)}}>Afkeuren</Button></> : "No access"}
+                  {props.auth['medewerkerType'] >= 1 ? <><Button onClick={() => {changeStatus(row.verlofID, 2)}}>Goedkeuren</Button><Button onClick={() => {changeStatus(row.verlofID, 3)}}>Afkeuren</Button></> : "Geen toegang"}
                 </StyledTableCell>
               </StyledTableRow>
             );

@@ -18,63 +18,61 @@ const theme = createTheme();
 export default function Register() {
   const router = useRouter();
 
-  const teams = ["Team 1", "Team 2", "Team 3"];
+  const [hideMedewerker, setHideMedewerker] = useState(false);
 
-  const [name, setName] = useState("");
-  const [password, setPassword] = useState("");
-  const [confirmPassword, setConfirmPassword] = useState("");
-  let [curTeam, setCurTeam] = useState(teams[0]);
 
-  const inputName = useRef();
-  const inputPassword = useRef();
-  const inputConfirmPassword = useRef();
 
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    if (
-      name.length != 0 &&
-      password === confirmPassword &&
-      password.length != 0
-    ) {
-      const data = new FormData(event.currentTarget);
-      axios
-        .put("http://localhost:11738/Medewerker", {
-          isAdmin: false,
-          naam: data.get("name"),
-          wachtwoord: data.get("password"),
-        })
-        .then(() => {
-          router.push("/");
-        });
-    } else if (name.length === 0) {
-      inputName.current.style.border = "1px solid red";
-    } else if (
-      (name && password.length === 0) ||
-      (name && confirmPassword.length === 0)
-    ) {
-      inputPassword.current.style.border = "1px solid red";
-      inputConfirmPassword.current.style.border = "1px solid red";
-    } else {
-      inputPassword.current.style.border = "1px solid red";
-      inputConfirmPassword.current.style.border = "1px solid red";
-    }
-  };
+  const RegistreerMedewerker = () => {
+    const medewerkerType = ["0: Medewerker", "1: Teamleider", "2: Directie"];
 
-  return (
-    <>
-      <ThemeProvider theme={theme}>
-        <Container component="main" maxWidth="xs">
-          <CssBaseline />
-          <Box
-            sx={{
-              marginTop: 8,
-              display: "flex",
-              flexDirection: "column",
-              alignItems: "center",
-            }}
-          >
+    const [teamId, setTeamId] = useState(1);
+    const [name, setName] = useState("");
+    const [password, setPassword] = useState("");
+    const [confirmPassword, setConfirmPassword] = useState("");
+    let [curMedewerkerType, setCurMedewerkerType] = useState(medewerkerType[0]);
+  
+    const inputTeamId = useRef();
+    const inputName = useRef();
+    const inputPassword = useRef();
+    const inputConfirmPassword = useRef();
+  
+    const handleSubmit = (event) => {
+      event.preventDefault();
+      if (
+        name.length != 0 &&
+        password === confirmPassword &&
+        password.length != 0
+      ) {
+        const data = new FormData(event.currentTarget);
+        axios
+          .put("http://localhost:11738/Medewerker", {
+            isAdmin: false,
+            Naam: data.get("name"),
+            Wachtwoord: data.get("password"),
+            MedewerkerType: curMedewerkerType.charAt(0),
+            TeamID: teamId,
+          })
+          .then(() => {
+            router.push("/");
+          });
+      } else if (name.length === 0) {
+        inputName.current.style.border = "1px solid red";
+      } else if (
+        (name && password.length === 0) ||
+        (name && confirmPassword.length === 0)
+      ) {
+        inputPassword.current.style.border = "1px solid red";
+        inputConfirmPassword.current.style.border = "1px solid red";
+      } else {
+        inputPassword.current.style.border = "1px solid red";
+        inputConfirmPassword.current.style.border = "1px solid red";
+      }
+    };
+
+    return (
+          <>
             <Typography component="h1" variant="h5">
-              Registreren
+            Registreer medewerker
             </Typography>
             <Box
               component="form"
@@ -82,29 +80,41 @@ export default function Register() {
               noValidate
               sx={{ mt: 1 }}
             >
-              <InputLabel id="select-label">Team</InputLabel>
+              <InputLabel id="select-label">Medewerker type</InputLabel>
               <Select
                 style={{ width: "100%" }}
                 labelId="select-label"
                 id="select"
-                defaultValue={curTeam}
+                defaultValue={curMedewerkerType}
                 onChange={(e) => {
-                  console.log(e, curTeam);
-                  setCurTeam(e.target.value);
+                  setCurMedewerkerType(e.target.value);
                 }}
               >
-                {/* <MenuItem key="2" value="2">2</MenuItem>
-                <MenuItem key="3" value="3">3</MenuItem> */}
-
-                {teams.map((team) => {
-                  console.log(team);
+                {medewerkerType.map((medewerker) => {
                   return (
-                    <MenuItem key={team} value={team}>
-                      {team}
+                    <MenuItem key={medewerker} value={medewerker}>
+                      {medewerker}
                     </MenuItem>
                   );
                 })}
               </Select>
+              <TextField
+                margin="normal"
+                required
+                fullWidth
+                type="number"
+                InputProps={{
+                  inputProps: {
+                      min: 1
+                  }
+              }}
+                id="teamId"
+                name="teamId"
+                label="Team id"
+                value={teamId}
+                onChange={(e) => setTeamId(e.target.value)}
+                ref={inputTeamId}
+              />
               <TextField
                 margin="normal"
                 required
@@ -142,9 +152,6 @@ export default function Register() {
                 onChange={(e) => setConfirmPassword(e.target.value)}
                 ref={inputConfirmPassword}
               />
-
-              <Checkbox defaultChecked />
-              {}
               <Button
                 type="submit"
                 fullWidth
@@ -154,6 +161,74 @@ export default function Register() {
                 Registreren
               </Button>
             </Box>
+          </>
+    );
+  }
+
+  const RegistreerTeam = () => {
+    const [teamNaam, setTeamNaam] = useState("");
+
+    const handleSubmit = (event) => {
+      event.preventDefault();
+
+      if (teamNaam.length != 0) {
+        console.log(teamNaam);
+      }
+    }
+
+    return (
+          <>
+            <Typography component="h1" variant="h5">
+              Registreer team
+            </Typography>
+            <Box
+              component="form"
+              onSubmit={handleSubmit}
+              noValidate
+              sx={{ mt: 1 }}
+            >
+              <TextField
+                margin="normal"
+                required
+                fullWidth
+                type="text"
+                id="teamNaam"
+                name="teamNaam"
+                label="Team naam"
+                value={teamNaam}
+                onChange={(e) => setTeamNaam(e.target.value)}
+              />
+              <Button
+                type="submit"
+                fullWidth
+                variant="contained"
+                sx={{ mt: 3, mb: 2 }}
+              >
+                Registreren
+              </Button>
+            </Box>
+          </>
+    );
+  }
+
+  return (
+    <>
+      <ThemeProvider theme={theme}>
+        <Container component="main" maxWidth="xs">
+          <CssBaseline />
+          <Box
+            sx={{
+              marginTop: 8,
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
+            }}
+          >
+            <Box sx={{display: "flex", gap: "20px", marginBottom: "24px", background: "#eaeaea", padding: "11px", borderRadius: "20px"}}>
+              <Button onClick={() => {setHideMedewerker(false)}}>Registreer medewerker</Button>
+              <Button onClick={() => {setHideMedewerker(true)}}>Registreer team</Button>
+            </Box>
+            {hideMedewerker ? <RegistreerTeam /> : <RegistreerMedewerker />}
           </Box>
         </Container>
       </ThemeProvider>

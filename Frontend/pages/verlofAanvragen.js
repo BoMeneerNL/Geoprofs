@@ -40,10 +40,12 @@ export default function VerlofAanvraag() {
 
   const [users, setUsers] = useState([]);
 
+  console.log("wat is user", users);
   function vraagVerlofAan() {
     axios
       .put("http://localhost:11738/Verlof", {
         medewerkerId: curUser,
+        // teamId: 1,
         van: vanTimestamp,
         tot: totTimestamp,
         status: 1,
@@ -52,6 +54,11 @@ export default function VerlofAanvraag() {
       .then(() => {
         router.push("/verlof");
       });
+  }
+
+  function test() {
+    console.log("test", users);
+    console.log("curUser", curUser);
   }
 
   useEffect(() => {
@@ -101,6 +108,9 @@ export default function VerlofAanvraag() {
                 onChange={(e) => {
                   setCurUser(e.target.value);
                 }}
+                onClick={(e) => {
+                  test();
+                }}
               >
                 {users}
               </Select>
@@ -114,6 +124,7 @@ export default function VerlofAanvraag() {
                 renderInput={(params) => <TextField {...params} />}
               />
               <DatePicker
+                disablePast
                 label="Tot"
                 value={tot}
                 onChange={(value) => {

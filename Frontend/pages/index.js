@@ -51,7 +51,7 @@ export default function Home(props) {
               </StyledTableCell>
               <StyledTableCell>{row.wachtwoord}</StyledTableCell>
               <StyledTableCell>
-                {row.isAdmin ? (
+                {props.auth["medewerkerType"] > 1 ? (
                   <>
                     <EditIcon sx={{ pointer: "cursor" }} />
                     <DeleteForeverIcon
