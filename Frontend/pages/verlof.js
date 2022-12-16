@@ -32,24 +32,32 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
 }));
 
 function changeStatus(verlofId, newStatus) {
-  axios.post(`http://localhost:11738/changestatus/${verlofId}/${newStatus}`).then((response) => {
-    console.log(response);
-  });
+  axios
+    .post(`http://localhost:11738/changestatus/${verlofId}/${newStatus}`)
+    .then((response) => {
+      console.log(response);
+    });
   window.location.reload();
 }
 
 export default function Verlof(props) {
   const router = useRouter();
   const [datafield, setDatafield] = useState([]);
-  const medewerkerId = props.auth['medewerkerID'];
-  const teamId = props.auth['teamID'];
+  const medewerkerId = props.auth["medewerkerID"];
+  const teamId = props.auth["teamID"];
   useEffect(() => {
     axios.get("http://localhost:11738/Verlof").then((response) => {
       setDatafield(
         response.data.map((row, key) => {
           console.log("props data:", props.auth);
           console.log("row data:", row);
-          if (props.auth['medewerkerType'] === 0 && row['medewerkerID'] === medewerkerId || props.auth['medewerkerType'] === 1 && row['teamID'] === teamId) {
+          //teamid wordt niet meegegeven dus is altijd 0
+          if (
+            (props.auth["medewerkerType"] === 0 &&
+              row["medewerkerID"] === medewerkerId) ||
+            (props.auth["medewerkerType"] === 1 && row["teamID"] === teamId) ||
+            props.auth["medewerkerType"] === 2
+          ) {
             const van = new Date(row.van * 1000).toLocaleDateString();
             const tot = new Date(row.tot * 1000).toLocaleDateString();
             return (
@@ -69,7 +77,26 @@ export default function Verlof(props) {
                     : "An error occured"}
                 </StyledTableCell>
                 <StyledTableCell>
-                  {props.auth['medewerkerType'] >= 1 ? <><Button onClick={() => {changeStatus(row.verlofID, 2)}}>Goedkeuren</Button><Button onClick={() => {changeStatus(row.verlofID, 3)}}>Afkeuren</Button></> : "Geen toegang"}
+                  {props.auth["medewerkerType"] >= 1 ? (
+                    <>
+                      <Button
+                        onClick={() => {
+                          changeStatus(row.verlofID, 2);
+                        }}
+                      >
+                        Goedkeuren
+                      </Button>
+                      <Button
+                        onClick={() => {
+                          changeStatus(row.verlofID, 3);
+                        }}
+                      >
+                        Afkeuren
+                      </Button>
+                    </>
+                  ) : (
+                    "Geen toegang"
+                  )}
                 </StyledTableCell>
               </StyledTableRow>
             );
@@ -77,7 +104,7 @@ export default function Verlof(props) {
         })
       );
     });
-  }, [props,medewerkerId]);
+  }, [props, medewerkerId]);
   return (
     <>
       <TableContainer
