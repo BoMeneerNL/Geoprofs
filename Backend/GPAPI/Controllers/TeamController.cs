@@ -21,7 +21,7 @@ namespace GPAPI.Controllers
         {
             return Ok(_context.Teams.Find(id));
         }
-        [HttpPost]
+        [HttpPost("/addteam/{naam}")]
         public ActionResult AddTeam(string naam)
         {
             Team team = new()
@@ -33,7 +33,7 @@ namespace GPAPI.Controllers
             return Ok();
         }
         [HttpDelete("{id}")]
-        public ActionResult RemoveTeam(ulong id)
+        public ActionResult RemoveTeam(int id)
         {
             {
                 Team team = _context.Teams.Find(id);
