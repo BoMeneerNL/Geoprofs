@@ -43,10 +43,13 @@ export default function Register() {
     console.log("hi");
   };
   useEffect(() => {
-    axios.get("http://localhost:11738/Teams").then((response) => {
-      console.log(response.data);
-      setTeams(response.data);
-    });
+    axios
+      .get("http://localhost:11738/Teams")
+      .then((response) => {
+        console.log(response.data);
+        setTeams(response.data);
+      })
+      .catch(() => {});
   }, []);
   return (
     <>
@@ -75,7 +78,8 @@ export default function Register() {
                           .delete(`http://localhost:11738/Teams/${team.teamID}`)
                           .then((response) => {
                             window.location.reload();
-                          });
+                          })
+                          .catch(() => {});
                       }}
                     />
                   </TableCell>

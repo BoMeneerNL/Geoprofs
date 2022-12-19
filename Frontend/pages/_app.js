@@ -8,7 +8,7 @@ import Cookies from "js-cookie";
 export default function MyApp({ Component, pageProps }) {
   const [authinf, setAuthinf] = useState({});
   const router = useRouter();
-  
+
   useEffect(() => {
     if (typeof window !== "undefined") {
       if (

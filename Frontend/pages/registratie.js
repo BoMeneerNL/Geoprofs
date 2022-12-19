@@ -35,19 +35,23 @@ export default function Register() {
     const inputConfirmPassword = useRef();
 
     useEffect(() => {
-      axios.get(`http://localhost:11738/Teams/`).then(({ data }) => {
-        setAllTeams(data);
-        setCurrentTeam(data[0]);
-      });
+      axios
+        .get(`http://localhost:11738/Teams/`)
+        .then(({ data }) => {
+          setAllTeams(data);
+          setCurrentTeam(data[0]);
+        })
+        .then(() => {})
+        .catch(() => {});
     }, []);
 
     const handleSubmit = (event) => {
       event.preventDefault();
 
       if (
-        name.length != 0 &&
+        name.length !== 0 &&
         password === confirmPassword &&
-        password.length != 0
+        password.length !== 0
       ) {
         const data = new FormData(event.currentTarget);
         axios
@@ -59,16 +63,14 @@ export default function Register() {
             TeamID: currentTeam.id,
           })
           .then(() => {
-            router.push("/");
-          });
+            router
+              .push("/")
+              .then(() => {})
+              .catch(() => {});
+          })
+          .catch(() => {});
       } else if (name.length === 0) {
         inputName.current.style.border = "1px solid red";
-      } else if (
-        (name && password.length === 0) ||
-        (name && confirmPassword.length === 0)
-      ) {
-        inputPassword.current.style.border = "1px solid red";
-        inputConfirmPassword.current.style.border = "1px solid red";
       } else {
         inputPassword.current.style.border = "1px solid red";
         inputConfirmPassword.current.style.border = "1px solid red";
@@ -173,12 +175,13 @@ export default function Register() {
     const handleSubmit = (event) => {
       event.preventDefault();
 
-      if (teamNaam.length != 0) {
+      if (teamNaam.length !== 0) {
         axios
           .post(`http://localhost:11738/addteam/${teamNaam}`)
           .then((response) => {
             console.log(response);
-          });
+          })
+          .catch(() => {});
         window.location.reload();
       }
     };

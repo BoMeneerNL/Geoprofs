@@ -41,36 +41,39 @@ export default function Home(props) {
     if (props.auth < 2) {
       router.push("/verlof");
     } else {
-      axios.get("http://localhost:11738/Medewerker").then((response) => {
-        datacollector = response.data;
-        setDatafield(
-          datacollector.map((row, key) => (
-            <StyledTableRow key={key}>
-              <StyledTableCell component="th" scope="row">
-                {row.naam}
-              </StyledTableCell>
-              <StyledTableCell>{row.wachtwoord}</StyledTableCell>
-              <StyledTableCell>
-                {props.auth["medewerkerType"] > 1 ? (
-                  <>
-                    <EditIcon sx={{ pointer: "cursor" }} />
-                    <DeleteForeverIcon
-                      sx={{ pointer: "cursor" }}
-                      onClick={() => {
-                        deleteMedewerker(row.medewerkerID, key);
-                      }}
-                    />
-                  </>
-                ) : (
-                  <Typography>
-                    Je hebt geen rechten om iets aan te passen
-                  </Typography>
-                )}
-              </StyledTableCell>
-            </StyledTableRow>
-          ))
-        );
-      });
+      axios
+        .get("http://localhost:11738/Medewerker")
+        .then((response) => {
+          datacollector = response.data;
+          setDatafield(
+            datacollector.map((row, key) => (
+              <StyledTableRow key={key}>
+                <StyledTableCell component="th" scope="row">
+                  {row.naam}
+                </StyledTableCell>
+                <StyledTableCell>{row.wachtwoord}</StyledTableCell>
+                <StyledTableCell>
+                  {props.auth["medewerkerType"] > 1 ? (
+                    <>
+                      <EditIcon sx={{ pointer: "cursor" }} />
+                      <DeleteForeverIcon
+                        sx={{ pointer: "cursor" }}
+                        onClick={() => {
+                          deleteMedewerker(row.medewerkerID, key);
+                        }}
+                      />
+                    </>
+                  ) : (
+                    <Typography>
+                      Je hebt geen rechten om iets aan te passen
+                    </Typography>
+                  )}
+                </StyledTableCell>
+              </StyledTableRow>
+            ))
+          );
+        })
+        .catch(() => {});
     }
   }, []);
 

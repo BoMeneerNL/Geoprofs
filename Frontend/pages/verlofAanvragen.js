@@ -31,7 +31,8 @@ export default function VerlofAanvraag(props) {
       })
       .then(() => {
         router.push("/verlof");
-      });
+      })
+      .catch(() => {});
   }
   useEffect(() => {
     setVanTimestamp(moment(van).unix());
@@ -94,12 +95,12 @@ export default function VerlofAanvraag(props) {
               id="reden"
               name="reden"
               label="Reden"
-              sx={{marginTop: 0}}
+              sx={{ marginTop: 0 }}
               value={reden}
               onChange={(e) => setReden(e.target.value)}
             />
             <Button
-              type="submit" 
+              type="submit"
               fullWidth
               variant="contained"
               onClick={(e) => {
