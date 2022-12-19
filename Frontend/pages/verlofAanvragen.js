@@ -11,19 +11,23 @@ import axios from "axios";
 import moment from "moment";
 import { useRouter } from "next/router";
 
-export default function VerlofAanvraag() {
+export default function VerlofAanvraag(props) {
   const router = useRouter();
   const [van, setVan] = useState(null);
   const [vanTimestamp, setVanTimestamp] = useState(0);
   const [tot, setTot] = useState(null);
   const [totTimestamp, setTotTimestamp] = useState(0);
+  const [reden, setReden] = useState("");
+
   function vraagVerlofAan() {
     axios
       .put("http://localhost:11738/Verlof", {
+        teamID: props.auth["teamID"],
+        medewerkerId: props.auth["medewerkerID"],
         van: vanTimestamp,
         tot: totTimestamp,
         status: 1,
-        reden: null,
+        reden: reden,
       })
       .then(() => {
         router.push("/verlof");
@@ -83,9 +87,19 @@ export default function VerlofAanvraag() {
                 renderInput={(params) => <TextField {...params} />}
               />
             </LocalizationProvider>
-            <TextField/>
+            <TextField
+              margin="normal"
+              required
+              fullWidth
+              id="reden"
+              name="reden"
+              label="Reden"
+              sx={{marginTop: 0}}
+              value={reden}
+              onChange={(e) => setReden(e.target.value)}
+            />
             <Button
-              type="submit"
+              type="submit" 
               fullWidth
               variant="contained"
               onClick={(e) => {
