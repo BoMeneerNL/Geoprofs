@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Text.Json.Serialization;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace GPAPI.Models
 {
@@ -13,6 +11,7 @@ namespace GPAPI.Models
         public uint Van { get; set; }
         public uint Tot { get; set; }
         public byte Status { get; set; }
-        public string Reden { get; set; }
+        public string RedenVerzoek { get; set; }
+        public string RedenAntwoord { get; set; }
     }
 }
