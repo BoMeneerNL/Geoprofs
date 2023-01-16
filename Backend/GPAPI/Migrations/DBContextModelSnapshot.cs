@@ -81,7 +81,10 @@ namespace GPAPI.Migrations
                     b.Property<ulong>("MedewerkerID")
                         .HasColumnType("INTEGER");
 
-                    b.Property<string>("Reden")
+                    b.Property<string>("RedenAntwoord")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("RedenVerzoek")
                         .HasColumnType("TEXT");
 
                     b.Property<byte>("Status")
