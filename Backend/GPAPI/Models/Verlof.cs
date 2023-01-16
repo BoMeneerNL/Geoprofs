@@ -10,6 +10,9 @@ namespace GPAPI.Models
         public int VerlofID { get; set; }
         public int TeamID { get; set; }
         public ulong MedewerkerID { get; set; }
+        public Medewerker Medewerker { get; set; }
+        public Team Team { get; set; }
+
         public uint Van { get; set; }
         public uint Tot { get; set; }
         public byte Status { get; set; }
