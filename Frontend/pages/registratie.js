@@ -181,8 +181,10 @@ export default function Register() {
           .then((response) => {
             console.log(response);
           })
-          .catch(() => {});
-        window.location.reload();
+          .catch((e) => {
+            console.log(e);
+          });
+        // window.location.reload();
       }
     };
 

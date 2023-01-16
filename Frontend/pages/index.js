@@ -51,7 +51,6 @@ export default function Home(props) {
                 <StyledTableCell component="th" scope="row">
                   {row.naam}
                 </StyledTableCell>
-                <StyledTableCell>{row.wachtwoord}</StyledTableCell>
                 <StyledTableCell>
                   {props.auth["medewerkerType"] > 1 ? (
                     <>
@@ -88,7 +87,6 @@ export default function Home(props) {
               <StyledTableCell component="th" scope="row">
                 {row.naam}
               </StyledTableCell>
-              <StyledTableCell>{row.wachtwoord}</StyledTableCell>
               <StyledTableCell>
                 {row.isAdmin ? (
                   <>
@@ -123,7 +121,6 @@ export default function Home(props) {
           <TableHead>
             <TableRow>
               <StyledTableCell>Naam</StyledTableCell>
-              <StyledTableCell>Wachtwoord</StyledTableCell>
               <StyledTableCell>Acties</StyledTableCell>
             </TableRow>
           </TableHead>
