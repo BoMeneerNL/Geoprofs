@@ -10,6 +10,10 @@ import Button from "@mui/material/Button";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
+import MedewerkerVerlof from "../components/MedewerkerVerlof";
+import TeamleiderVerlof from "../components/TeamleiderVerlof";
+import DirectieVerlof from "../components/DirectieVerlof";
+
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
@@ -53,58 +57,36 @@ export default function Verlof(props) {
       .then((response) => {
         setDatafield(
           response.data.map((row, key) => {
-            const van = new Date(row.van * 1000).toLocaleDateString();
-            const tot = new Date(row.tot * 1000).toLocaleDateString();
-            console.log("wat is dit", medewerkerType);
-            // hallo
-            return (
-              <StyledTableRow key={key}>
-                {medewerkerType === 2 (
-                  <>
-                <StyledTableCell component="th" scope="row">
-                  {row.naam}
-                </StyledTableCell>
-                <StyledTableCell>{row.teamID}</StyledTableCell>
-                <StyledTableCell>{van}</StyledTableCell>
-                <StyledTableCell>{tot}</StyledTableCell>
-                <StyledTableCell>{row.reden}</StyledTableCell>
-                <StyledTableCell>
-                  {row.status === 1
-                    ? "Nog niet beoordeeld"
-                    : row.status === 2
-                    ? "Goedgekeurd"
-                    : row.status === 3
-                    ? "Afgewezen"
-                    : "An error occured"}
-                </StyledTableCell>
-                <StyledTableCell>
-                  {props.auth["medewerkerType"] >= 1 && row.status === 1 ? (
-                    <>
-                      <Button
-                        onClick={() => {
-                          changeStatus(row.verlofID, 2);
-                        }}
-                      >
-                        Goedkeuren
-                      </Button>
-                      <Button
-                        onClick={() => {
-                          changeStatus(row.verlofID, 3);
-                        }}
-                      >
-                        Afkeuren
-                      </Button>
-                    </>
-                  ) : row.status > 1 ? (
-                    "Geen acties mogelijk"
-                  ) : (
-                    "Geen toegang"
-                  )}
-                </StyledTableCell>
-                </>
-                )}
-              </StyledTableRow>
-            );
+            
+            
+            console.log("wat is dit test", medewerkerType);
+            console.log("60", row)
+            if (medewerkerType === 0) {
+               {console.log("medewerkerType is 0")}
+               return (
+                <StyledTableRow key={key}>  
+                    <MedewerkerVerlof row={row} medewerkerType={medewerkerType} medewerkerID={medewerkerId}/>
+                </StyledTableRow>
+               )
+                
+            } else if (medewerkerType === 1) {
+              {console.log("medewerkerType is 1")}
+              return (
+                <StyledTableRow key={key}>
+                    <TeamleiderVerlof row={row} medewerkerType={medewerkerType} teamId={teamId}/>
+                </StyledTableRow>
+              );
+            }
+            else if (medewerkerType === 2) {
+              {console.log("medewerkerType is 2")}
+              return (
+                <StyledTableRow key={key}>
+                    <DirectieVerlof row={row} medewerkerType={medewerkerType}/>
+                </StyledTableRow>
+              );
+            }
+
+            
           })
         );
       })

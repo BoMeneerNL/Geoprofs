@@ -1225,26 +1225,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"csfe@workspace:.":
-  version: 0.0.0-use.local
-  resolution: "csfe@workspace:."
-  dependencies:
-    "@emotion/react": ^11.10.5
-    "@emotion/styled": ^11.10.5
-    "@mui/icons-material": ^5.11.0
-    "@mui/material": ^5.11.0
-    "@mui/x-date-pickers": ^5.0.11
-    axios: ^1.2.1
-    eslint: ^8.30.0
-    eslint-config-next: ^13.0.7
-    js-cookie: ^3.0.1
-    moment: ^2.29.4
-    next: ^13.0.7
-    react: ^18.2.0
-    react-dom: ^18.2.0
-  languageName: unknown
-  linkType: soft
-
 "csstype@npm:^3.0.2":
   version: 3.1.0
   resolution: "csstype@npm:3.1.0"
@@ -1872,6 +1852,26 @@ __metadata:
   checksum: c3f1f5ba20f4e962efb71344ce0a40722163e85bee2101ce25f88214e78182d2d2476aa85ef37950c579eb6cf6ee811c17b3101bb84004bb75655f3e33f3fdb5
   languageName: node
   linkType: hard
+
+"geoprofs_frontend@workspace:.":
+  version: 0.0.0-use.local
+  resolution: "geoprofs_frontend@workspace:."
+  dependencies:
+    "@emotion/react": ^11.10.5
+    "@emotion/styled": ^11.10.5
+    "@mui/icons-material": ^5.11.0
+    "@mui/material": ^5.11.0
+    "@mui/x-date-pickers": ^5.0.11
+    axios: ^1.2.1
+    eslint: ^8.30.0
+    eslint-config-next: ^13.0.7
+    js-cookie: ^3.0.1
+    moment: ^2.29.4
+    next: ^13.0.7
+    react: ^18.2.0
+    react-dom: ^18.2.0
+  languageName: unknown
+  linkType: soft
 
 "get-intrinsic@npm:^1.0.2, get-intrinsic@npm:^1.1.0, get-intrinsic@npm:^1.1.1, get-intrinsic@npm:^1.1.2":
   version: 1.1.2

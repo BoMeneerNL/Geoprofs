@@ -27,7 +27,7 @@ export default function VerlofAanvraag(props) {
         van: vanTimestamp,
         tot: totTimestamp,
         status: 1,
-        reden: reden,
+        redenVerzoek: reden,
       })
       .then(() => {
         router.push("/verlof");
