@@ -37,8 +37,6 @@ export default function Register() {
   const inputName = useRef();
   const handleSubmit = (event) => {
     event.preventDefault();
-
-    console.log("hi");
   };
   useEffect(() => {
     axios

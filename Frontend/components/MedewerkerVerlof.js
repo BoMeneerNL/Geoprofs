@@ -12,31 +12,28 @@ import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
-    [`&.${tableCellClasses.head}`]: {
-      backgroundColor: theme.palette.common.black,
-      color: theme.palette.common.white,
-    },
-    [`&.${tableCellClasses.body}`]: {
-      fontSize: 14,
-    },
-  }));
-  
-  const StyledTableRow = styled(TableRow)(({ theme }) => ({
-    "&:nth-of-type(odd)": {
-      backgroundColor: theme.palette.action.hover,
-    },
-    // hide last border
-    "&:last-child td, &:last-child th": {
-      border: 0,
-    },
-  }));
+  [`&.${tableCellClasses.head}`]: {
+    backgroundColor: theme.palette.common.black,
+    color: theme.palette.common.white,
+  },
+  [`&.${tableCellClasses.body}`]: {
+    fontSize: 14,
+  },
+}));
 
+const StyledTableRow = styled(TableRow)(({ theme }) => ({
+  "&:nth-of-type(odd)": {
+    backgroundColor: theme.palette.action.hover,
+  },
+  // hide last border
+  "&:last-child td, &:last-child th": {
+    border: 0,
+  },
+}));
 
-const MedewerkerVerlof = ({row, medewerkerType, medewerkerID}) => {
+const MedewerkerVerlof = ({ row, medewerkerType, medewerkerID }) => {
   const van = new Date(row.van * 1000).toLocaleDateString();
   const tot = new Date(row.tot * 1000).toLocaleDateString();
-
-  console.log(medewerkerID, row.medewerkerID)
 
   if (medewerkerID === row.medewerkerID) {
     return (
@@ -81,11 +78,9 @@ const MedewerkerVerlof = ({row, medewerkerType, medewerkerID}) => {
             "Geen toegang"
           )}
         </StyledTableCell>
-        </>
-    )
+      </>
+    );
   }
-
-    
-}
+};
 
 export default MedewerkerVerlof;

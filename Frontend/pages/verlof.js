@@ -14,7 +14,6 @@ import MedewerkerVerlof from "../components/MedewerkerVerlof";
 import TeamleiderVerlof from "../components/TeamleiderVerlof";
 import DirectieVerlof from "../components/DirectieVerlof";
 
-
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
     backgroundColor: theme.palette.common.black,
@@ -33,6 +32,11 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
   "&:last-child td, &:last-child th": {
     border: 0,
   },
+}));
+
+const StyledTableRowTeam = styled(TableRow)(({ theme }) => ({
+    backgroundColor: "#888888",
+    
 }));
 
 function changeStatus(verlofId, newStatus) {
@@ -55,38 +59,72 @@ export default function Verlof(props) {
     axios
       .get("http://localhost:11738/Verlof")
       .then((response) => {
+        let sortedVerlof = response.data.sort((a, b) => {
+          let teamNaamA = a.teamNaam.toLowerCase(),
+            teamNaamB = b.teamNaam.toLowerCase();
+
+          if (teamNaamA < teamNaamB) //sort string ascending
+            return -1;
+          if (teamNaamA > teamNaamB) return 1;
+          return 0; //default return value (no sorting)
+        });
+        console.log(sortedVerlof);
+
+        let previousTeamNaam = "";
+
         setDatafield(
-          response.data.map((row, key) => {
-            
-            
-            console.log("wat is dit test", medewerkerType);
-            console.log("60", row)
-            if (medewerkerType === 0) {
-               {console.log("medewerkerType is 0")}
-               return (
-                <StyledTableRow key={key}>  
-                    <MedewerkerVerlof row={row} medewerkerType={medewerkerType} medewerkerID={medewerkerId}/>
-                </StyledTableRow>
-               )
-                
-            } else if (medewerkerType === 1) {
-              {console.log("medewerkerType is 1")}
-              return (
-                <StyledTableRow key={key}>
-                    <TeamleiderVerlof row={row} medewerkerType={medewerkerType} teamId={teamId}/>
-                </StyledTableRow>
-              );
-            }
-            else if (medewerkerType === 2) {
-              {console.log("medewerkerType is 2")}
-              return (
-                <StyledTableRow key={key}>
-                    <DirectieVerlof row={row} medewerkerType={medewerkerType}/>
-                </StyledTableRow>
-              );
+          sortedVerlof.map((row, key) => {
+            console.log(row);
+
+            let currentTeamNaam = row.teamNaam;
+            if (key !== 0) {
+              previousTeamNaam = sortedVerlof[key - 1].teamNaam;
             }
 
+            console.log(previousTeamNaam);
+
             
+            
+
+            if (medewerkerType === 0) {
+              {
+                console.log("medewerkerType is 0");
+              }
+              return (
+                <StyledTableRow key={key}>
+                  <MedewerkerVerlof
+                    row={row}
+                    medewerkerType={medewerkerType}
+                    medewerkerID={medewerkerId}
+                  />
+                </StyledTableRow>
+              );
+            } else if (medewerkerType === 1) {
+              {
+                console.log("medewerkerType is 1");
+              }
+              return (
+                <StyledTableRow key={key}>
+                  <TeamleiderVerlof
+                    row={row}
+                    medewerkerType={medewerkerType}
+                    teamId={teamId}
+                  />
+                </StyledTableRow>
+              );
+            } else if (medewerkerType === 2) {
+              {
+                console.log("medewerkerType is 2");
+              }
+              return (
+                <>
+                {currentTeamNaam != previousTeamNaam? <StyledTableRowTeam><TableCell sx={{color: "#fff", fontWeight: "bold", fontSize: 16}} colSpan={7}>{currentTeamNaam}</TableCell></StyledTableRowTeam> : null}
+                <StyledTableRow key={key}>
+                  <DirectieVerlof row={row} medewerkerType={medewerkerType} />
+                </StyledTableRow>
+                </>
+              );
+            }
           })
         );
       })

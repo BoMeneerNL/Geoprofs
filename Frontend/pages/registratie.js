@@ -180,11 +180,11 @@ export default function Register() {
           .post(`http://localhost:11738/addteam/${teamNaam}`)
           .then((response) => {
             console.log(response);
+            window.location.reload();
           })
           .catch((e) => {
             console.log(e);
           });
-        // window.location.reload();
       }
     };
 
